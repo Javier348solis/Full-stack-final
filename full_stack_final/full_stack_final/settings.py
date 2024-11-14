@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'full_stack_final',
     'api',
 ]
 
@@ -78,8 +77,12 @@ WSGI_APPLICATION = 'full_stack_final.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Elixir_perfumes',
+        'USER': 'javier',
+        'PASSWORD': '120203',
+        'HOST': 'localhost',  # o tu host de MySQL si no es local
+        'PORT': '3306',  # el puerto por defecto de MySQL
     }
 }
 
