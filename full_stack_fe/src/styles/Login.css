@@ -1,0 +1,70 @@
+body{
+    background: #000 !important;
+}
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .login-form-container {
+    flex: 1;
+    background-color: rgb(1, 3, 38); 
+    opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .login-container::after {
+    content: '';
+    flex: 1;
+    background-image: url('../Images/calvin-klein-923529.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .login-form-container h1 {
+    margin-bottom: 20px;
+  }
+  
+  .login-form-container input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-form-container button {
+    padding: 10px 20px;
+    background-color: #f4f2ea; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-form-container a {
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .login-form-container a:hover {
+    text-decoration: underline;
+  }
+  button{
+    color: black;
+    width: 300px;
+  }
+
+  input:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
