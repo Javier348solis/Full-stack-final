@@ -4,7 +4,6 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  
   margin: 0;
   height: 100vh;
   position: relative;
@@ -30,8 +29,8 @@ body::before {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  gap: 20px; 
+  padding: 15px;
+  gap: px; 
   background-color: rgba(0, 0, 0, 0.6);  
   border-radius: 10px;
   width: 350px;
@@ -77,4 +76,9 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+.account-login{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }

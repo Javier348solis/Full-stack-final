@@ -63,6 +63,7 @@ function FormRegistro() {
 
   return (
     <div className='contenedor-registro'>
+      <h1>Registro</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -89,6 +90,7 @@ function FormRegistro() {
           onChange={(e) => setNumero(e.target.value)}
         />
         <button type="submit">Registrarse</button>
+        <a href="" className='account-login'>Ya tienes una cuenta?</a>
       </form>
     </div>
   );
