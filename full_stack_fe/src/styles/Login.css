@@ -1,6 +1,7 @@
 body{
-    background: #000 !important;
+  background-color: black !important;
 }
+
 .login-container {
     display: flex;
     height: 100vh;
@@ -66,5 +67,4 @@ body{
 
   input:focus {
     border-color: #4CAF50;
-    outline: none;
   }

@@ -1,11 +1,26 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import '../styles/Login.css'
+import { obtenerUsuario, guardarUsuario } from '../services/fetch';   
 
 
 function FormLogin() {
+     
+    //  const [nombre, setNombre] = (useState);
+    //  const [correo, setCorreo] = (useState);
+    //  const [contra, setContra] = (useState);
 
+    //  const usuarioLogin = {
+    //   username,
+    //   email,
+    //   password,
+    //  }
 
+    //  const validarFormulario = () =>{
+    //   if (!nombre || !correo || contra) {
+        
+    //   }
+    //  }
 
     return (
       <div className="login-container">
@@ -22,4 +37,4 @@ function FormLogin() {
     );
   }
 
-export default FormLogin
+export default FormLogin;

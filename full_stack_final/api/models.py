@@ -28,7 +28,7 @@ class DatosCompras(models.Model):
     
 class Productos(models.Model):
     uniqueId = models.AutoField(primary_key=True)
-    freignKey = models.ForeignKey(DatosCompras, on_delete=models.CASCADE) #Esta se relaciona con los dato de compras
+    # freignKey = models.ForeignKey(DatosCompras, on_delete=models.CASCADE) #Esta se relaciona con los dato de compras
     nombre_producto = models.CharField(max_length=255)
     cantidad_ml = models.IntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=4)

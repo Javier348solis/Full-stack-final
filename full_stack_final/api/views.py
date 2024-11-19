@@ -3,9 +3,9 @@ from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
-
+from django.contrib.auth import authenticate
 from .models import UserRegistro
-
+from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 class RegistrarUsuarioView(APIView):
     def post(self,request):
@@ -23,3 +23,16 @@ class RegistrarUsuarioView(APIView):
             
          
         
+class InicioSesionView(APIView):
+    def post(self,request):
+        nombre_usuario  = request.data.get("username")
+        clave_usuario = request.data.get("password")
+
+        usuario = authenticate(request,username=nombre_usuario,password=clave_usuario)
+        
+        if usuario is not None:
+            token = RefreshToken.for_user(usuario)
+            return Response({"success":"Usuario valido","token":str(token.access_token),},status=status.HTTP_200_OK)
+        else:
+            return Response({"error":"Usuario invalido",},status=status.HTTP_400_BAD_REQUEST)
+            
