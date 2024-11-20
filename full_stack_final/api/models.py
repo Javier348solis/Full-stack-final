@@ -31,7 +31,7 @@ class Productos(models.Model):
     # freignKey = models.ForeignKey(DatosCompras, on_delete=models.CASCADE) #Esta se relaciona con los dato de compras
     nombre_producto = models.CharField(max_length=255)
     cantidad_ml = models.IntegerField()
-    precio = models.DecimalField(max_digits=10, decimal_places=4)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
     marca= models. CharField(max_length=255)
     
     def __str__(self):

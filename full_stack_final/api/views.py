@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from .models import UserRegistro
+from .serializers import ProductosSerializer
+from .models import Productos, UserRegistro
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.generics import ListCreateAPIView
 # Create your views here.
 class RegistrarUsuarioView(APIView):
     def post(self,request):
@@ -36,3 +38,7 @@ class InicioSesionView(APIView):
         else:
             return Response({"error":"Usuario invalido",},status=status.HTTP_400_BAD_REQUEST)
             
+            
+class ProductoView(ListCreateAPIView):
+    queryset = Productos.objects.all()
+    serializer_class = ProductosSerializer
