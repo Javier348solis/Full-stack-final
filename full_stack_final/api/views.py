@@ -24,7 +24,7 @@ class RegistrarUsuarioView(APIView):
          
         
 class InicioSesionView(APIView):
-    def post(self,request):
+    def post(self,request):       
         nombre_usuario  = request.data.get("username")
         clave_usuario = request.data.get("password")
 

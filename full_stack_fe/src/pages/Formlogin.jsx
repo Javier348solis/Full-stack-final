@@ -10,17 +10,24 @@ function FormLogin() {
     //  const [correo, setCorreo] = (useState);
     //  const [contra, setContra] = (useState);
 
-    //  const usuarioLogin = {
-    //   username,
-    //   email,
-    //   password,
-    //  }
+     const usuarioLogin = {
+      username,
+      email,
+      password,
+     }
 
     //  const validarFormulario = () =>{
     //   if (!nombre || !correo || contra) {
         
     //   }
     //  }
+
+     try {
+      const traerDatos = await guardarUsuario(usuarioLogin, "registro-usuario/");
+      console.log('Usuario registrado', data)
+     } catch (error) {
+      
+     }
 
     return (
       <div className="login-container">

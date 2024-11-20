@@ -9,19 +9,6 @@ function FormRegistro() {
   const [numero, setNumero] = useState('');
   const [datos, setDatos] = useState([]);
 
-  // Usamos useEffect para cargar los usuarios si es necesario
-// useEffect(() => {
-  //   const obtainUsers = async () => {
-  //     try {
-  //       const datosUsuarios = await obtenerUsuario('user');
-  //       setDatos(datosUsuarios);
-  //     } catch (error) {
-  //       console.error("Error al obtener usuarios:", error);
-  //     }
-  //   };
-  //   obtainUsers();
-  // }, []);  // Este useEffect se ejecutará solo al montar el componente"
-
   // Función para validar los campos
   const validarEspacios = () => {
     if (!username || !password || !email || !numero) {
