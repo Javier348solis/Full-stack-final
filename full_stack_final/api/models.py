@@ -14,17 +14,8 @@ class UserRegistro(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     telefono = models.CharField(max_length=20,null=False,blank=False)
     
-
-class DatosCompras(models.Model):
-    uniqueId = models.AutoField(primary_key=True) 
-    foreignKey = models.ForeignKey(UserRegistro, on_delete=models.CASCADE) #El objetivo es que haga relacion con UserRegisytro
-    nombre_producto = models.CharField(max_length=255)
-    cantidad_botellas = models.IntegerField()
-    precio_total = models.DecimalField(max_digits=10, decimal_places=4)
-    fecha_de_compra = models.DateTimeField(auto_now_add=True)
-    #colocar relación de usuario    
     def __str__(self):
-        return f'{self.nombre_cliente} - {self.nombre_producto}'
+        return self.user.username
     
 class Productos(models.Model):
     uniqueId = models.AutoField(primary_key=True)
@@ -36,11 +27,23 @@ class Productos(models.Model):
     
     def __str__(self):
         return self.nombre_producto
+
+class DatosCompras(models.Model):
+    uniqueId = models.AutoField(primary_key=True) 
+    foreignKey = models.ForeignKey(UserRegistro, on_delete=models.CASCADE) 
+    foreignKey2 = models.ForeignKey(Productos, on_delete=models.CASCADE)#El objetivo es que haga relacion con UserRegisytro
+    nombre_producto = models.CharField(max_length=255)
+    cantidad_botellas = models.IntegerField()
+    precio_total = models.DecimalField(max_digits=10, decimal_places=4)
+    fecha_de_compra = models.DateTimeField(auto_now_add=True)
+    #colocar relación de usuario    
+    def __str__(self):
+        return f'{self.nombre_cliente} - {self.nombre_producto}'
+    
     
 class StockProductos(models.Model):
     iniqueId = models.AutoField(primary_key=True)
     foreignKey = models.ForeignKey(Productos, on_delete=models.CASCADE)
-    nombre_producto = models.CharField(max_length=255)
     cantidad_disponible = models.IntegerField()
    
   

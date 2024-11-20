@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from .serializers import ProductosSerializer
-from .models import Productos, UserRegistro
+from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer
+from .models import Productos, UserRegistro, StockProductos, DatosCompras
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.generics import ListCreateAPIView
 # Create your views here.
@@ -42,3 +42,11 @@ class InicioSesionView(APIView):
 class ProductoView(ListCreateAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
+    
+class StockView(ListCreateAPIView):
+    queryset = StockProductos.objects.all()
+    serializer_class = StockProductosSerializer
+    
+class DatosComprasView(ListCreateAPIView):
+    queryset = DatosCompras.objects.all()
+    serializer_class = DatosComprasSerializer
