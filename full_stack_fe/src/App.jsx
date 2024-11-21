@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import FormLogin from './pages/Formlogin'
 import FormRegistro from './pages/FormRegistro'
+import Home from './pages/Home'
 
 
 
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <>
-  <FormRegistro/>
+  <Home/>
     </>
   )
 }

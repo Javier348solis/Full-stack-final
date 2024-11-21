@@ -22,7 +22,17 @@ class RegistrarUsuarioView(APIView):
             nuevo_usuario = User.objects.create_user(username=nombre_usuario,email=correo_usuario,password=clave_usuario)
             UserRegistro.objects.create(user=nuevo_usuario,telefono=telefono_usuario)
             return Response({"success":"El usuario SÍ se pudo crear",},status=status.HTTP_201_CREATED)
-            
+
+class RegistrarAdminView(APIView):
+    def post(self,request):
+        nombre_usuario  = request.data.get("username")
+        clave_usuario = request.data.get("password")
+        
+        if User.objects.filter(username=nombre_usuario).exists():
+            return Response({"error":"El usuario NO se pudo crear",},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            nuevo_usuario = User.objects.create_superuser(username=nombre_usuario,password=clave_usuario)
+            return Response({"success":"El usuario SÍ se pudo crear",},status=status.HTTP_201_CREATED)
          
         
 class InicioSesionView(APIView):
