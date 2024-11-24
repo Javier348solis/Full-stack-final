@@ -1,8 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import '../styles/Home.css'
 
-function Home() {
+function  Home() {
   return (
+    <div className='contenedor-pagina'>
     <div id="carouselExampleCaptions" className="carousel slide">
         <Navbar/>
     <div className="carousel-indicators">
@@ -68,6 +70,7 @@ function Home() {
       <span className="carousel-control-next-icon" aria-hidden="true" />
       <span className="visually-hidden">Next</span>
     </button>
+  </div>
   </div>
   )
 }
