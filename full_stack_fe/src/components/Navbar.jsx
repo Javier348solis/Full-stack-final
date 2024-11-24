@@ -6,7 +6,7 @@ const Navbar = () => {
     <nav className="navbar">
       {/* Logo */}
       <div className="logo">
-        <img src="full_stack_fe/src/Images/ Your paragraph text.gif" alt="Logo" />
+        <img src="full_stack_fe/src/images/Your" alt="Logo" />
       </div>
 
       {/* Secciones de navegación */}
@@ -23,7 +23,7 @@ const Navbar = () => {
 
       {/* Carrito de compras */}
       <div className="cart">
-        <img src="https://via.placeholder.com/30" alt="Carrito" />
+       <img src="" alt="" />
       </div>
     </nav>
   );
