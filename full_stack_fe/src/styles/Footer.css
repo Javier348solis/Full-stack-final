@@ -1,0 +1,54 @@
+/* Asegura que el footer ocupe todo el ancho de la página */
+.footer {
+    width: 100%; /* Aseguramos que el footer ocupe todo el ancho */
+    background: linear-gradient(to top, #000000, #ffd700); /* Gradiente de negro a dorado */
+    color: white;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column; /* Establecemos que el contenido del footer se apile en una columna */
+    justify-content: flex-start; /* Para que el contenido se alinee al inicio del footer */
+    align-items: center; /* Centramos el contenido horizontalmente */
+  }
+  
+  .footer-content {
+    width: 100%; /* Aseguramos que este contenedor ocupe todo el ancho */
+    display: flex; /* Usamos flexbox para distribuir las columnas */
+    justify-content: space-evenly; /* Distribuimos las columnas uniformemente */
+    padding: 0 20px; /* Espaciado para que no se peguen a los bordes */
+  }
+  
+  .footer-column {
+    text-align: center;
+    flex: 1; /* Las columnas se distribuyen de manera igualitaria */
+  }
+  
+  .footer-column h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column a {
+    font-size: 14px;
+    margin: 5px 0;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-column a:hover {
+    color: #ffd700; /* Color dorado al pasar el ratón */
+  }
+  
+  /* Alineación de los derechos reservados a la derecha */
+  .footer-rights {
+    width: 100%; /* Aseguramos que el contenedor ocupe todo el ancho */
+    text-align: right; /* Alineamos el texto de los derechos reservados a la derecha */
+    padding-right: 20px; /* Padding para no pegar el texto al borde */
+    margin-top: 20px; /* Espaciado para separar de las columnas */
+  }
+  
+  .footer-rights p {
+    font-size: 14px;
+    margin: 0;
+  }
+  

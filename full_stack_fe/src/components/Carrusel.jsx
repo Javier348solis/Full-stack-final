@@ -1,6 +1,18 @@
 import React from 'react'
+import '../styles/Carrusel.css'
+import { useEffect } from 'react'
 
 function Carrusel() {
+
+useEffect(() =>{
+  const interval = setInterval(() =>{
+    const carousel = document.querySelector('carouselExampleCaptions');
+    const carouselinstancia = new window.bootstrap.Carousel(carousel);
+    carouselinstancia.next();
+  }, 5000);
+  return () => clearInterval(interval);
+}, []);
+
   return (
     <div className='contenedor-pagina'>
     <div id="carouselExampleCaptions" className="carousel slide">
