@@ -6,10 +6,10 @@
     padding: 10px 20px;
     color: white; 
     width: 100%; 
-    position: fixed; /* Fija el navbar al tope de la pagina */
+    position: fixed; 
     top: 0; 
     left: 0; 
-    z-index: 1000; /* Asegura que el navbar esté encima de otros elementos */
+    z-index: 1000;
   }
   
   .logo img {
