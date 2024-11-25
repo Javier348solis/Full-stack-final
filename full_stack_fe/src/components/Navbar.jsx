@@ -10,10 +10,16 @@ const Navbar = () => {
 
       {/* Secciones de navegación */}
       <div className="nav-links">
-        <a href="#ofertas">Ofertas</a>
-        <a href="#categorias">Categorías</a>
-        <a href="#otros">Otros</a>
-      </div>
+  <a href="/ofertas">Ofertas</a>
+  <div className="dropdown">
+    <a href="#categorias" className="dropdown-toggle">Categorías</a>
+    <div className="dropdown-menu">
+      <a href="/hombres">Perfumería Hombre</a>
+      <a href="/mujeres">Perfumería Mujer</a>
+    </div>
+  </div>
+  <a href="#otros">Otros</a>
+</div>
 
       {/* Barra de búsqueda */}
       <div className="search-bar">

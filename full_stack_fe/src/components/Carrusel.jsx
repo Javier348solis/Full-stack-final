@@ -8,23 +8,23 @@ function Carrusel() {
       <Carousel.Item>
         <Imagen text="First slide" url={"/src/Images/versace-eros.jpg"} />
         <div className="carousel-caption">
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Versace eros Energy (2024)</h3>
+          <p>Oferta: ₡50.000</p>
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <Imagen text="Second slide" url={"/src/Images/POLO PERFUME.jpg"} />
         <div className="carousel-caption">
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>Polo green</h3>
+          <p>Oferta: ₡46.000</p>
         </div>
       </Carousel.Item>
       <Carousel.Item>
         <Imagen text="Third slide" url={"/src/Images/versace eros.jpg"} />
         <div className="carousel-caption">
-          <h3>Third slide label</h3>
+          <h3>Versace eros EDT</h3>
           <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            Oferta: ₡44.000.
           </p>
         </div>
       </Carousel.Item>
