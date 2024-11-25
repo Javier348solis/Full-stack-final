@@ -1,87 +1,33 @@
-import React from 'react'
-import '../styles/Carrusel.css'
-import { useEffect } from 'react'
-
+import Carousel from 'react-bootstrap/Carousel';
+import Imagen from './Imagen';
 function Carrusel() {
-
-useEffect(() =>{
-  const interval = setInterval(() =>{
-    const carousel = document.querySelector('carouselExampleCaptions');
-    const carouselinstancia = new window.bootstrap.Carousel(carousel);
-    carouselinstancia.next();
-  }, 5000);
-  return () => clearInterval(interval);
-}, []);
-
   return (
-    <div className='contenedor-pagina'>
-    <div id="carouselExampleCaptions" className="carousel slide">
-    <div className="carousel-indicators">
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to={0}
-        className="active"
-        aria-current="true"
-        aria-label="Slide 1"
-      />
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to={1}
-        aria-label="Slide 2"
-      />
-      <button
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide-to={2}
-        aria-label="Slide 3"
-      />
-    </div>
-    <div className="carousel-inner">
-      <div className="carousel-item active">
-        <img src="..." className="d-block w-100" alt="..." />
-        <div className="carousel-caption d-none d-md-block">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
-        </div>
-      </div>
-      <div className="carousel-item">
-        <img src="..." className="d-block w-100" alt="..." />
-        <div className="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div className="carousel-item">
-        <img src="..." className="d-block w-100" alt="..." />
-        <div className="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button
-      className="carousel-control-prev"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="prev"
-    >
-      <span className="carousel-control-prev-icon" aria-hidden="true" />
-      <span className="visually-hidden">Previous</span>
-    </button>
-    <button
-      className="carousel-control-next"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide="next"
-    >
-      <span className="carousel-control-next-icon" aria-hidden="true" />
-      <span className="visually-hidden">Next</span>
-    </button>
-  </div>
-  </div>
-  )
+    <Carousel>
+      <Carousel.Item>
+        <Imagen text="First slide" />
+        <Carousel.Caption>
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <Imagen text="Second slide" />
+        <Carousel.Caption>
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <Imagen text="Third slide" />
+        <Carousel.Caption>
+          <h3>Third slide label</h3>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+  );
 }
 
-export default Carrusel
+export default Carrusel;

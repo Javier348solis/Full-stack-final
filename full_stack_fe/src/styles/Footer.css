@@ -1,6 +1,6 @@
 /* Asegura que el footer ocupe todo el ancho de la página */
 .footer {
-    width: 100%; /* Aseguramos que el footer ocupe todo el ancho */
+    width: 100vw; /* Aseguramos que el footer ocupe todo el ancho */
     background: linear-gradient(to top, #000000, #ffd700); /* Gradiente de negro a dorado */
     color: white;
     padding: 30px 0;
