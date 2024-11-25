@@ -10,7 +10,7 @@ function  Home() {
    <div>
      <Navbar/>
      <Carrusel/>
-    <Footer/>
+     <Footer/>
      
    </div>
   )

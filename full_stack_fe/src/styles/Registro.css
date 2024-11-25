@@ -1,4 +1,4 @@
-body {
+.contenedor-registro {
   background-image: url('../Images/perfume-4661282.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,18 +22,6 @@ body::before {
   background: rgba(0, 0, 0, 0.9);  
   z-index: -1; 
 
-}
-
-.contenedor-registro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 15px;
-  gap: px; 
-  background-color: rgba(0, 0, 0, 0.6);  
-  border-radius: 10px;
-  width: 350px;
 }
 
 .Titulo {

@@ -77,7 +77,7 @@ function FormRegistro() {
           onChange={(e) => setNumero(e.target.value)}
         />
         <button type="submit">Registrarse</button>
-        <a href="" className='account-login'>Ya tienes una cuenta?</a>
+        <a href="/login" className='account-login'>Ya tienes una cuenta?</a>
       </form>
     </div>
   );

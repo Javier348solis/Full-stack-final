@@ -4,9 +4,8 @@ import '../styles/Navbar.css'
 const Navbar = () => {
   return (
     <nav className="navbar">
-      {/* Logo */}
       <div className="logo">
-        <img src="full_stack_fe/src/images/Your" alt="Logo" />
+        <img src="\src\Images\Logo.gif" alt="Logo" />
       </div>
 
       {/* Secciones de navegación */}
@@ -23,7 +22,7 @@ const Navbar = () => {
 
       {/* Carrito de compras */}
       <div className="cart">
-       <img src="" alt="" />
+       <img src="\src\Images\verificar (1).png" alt="" />
       </div>
     </nav>
   );

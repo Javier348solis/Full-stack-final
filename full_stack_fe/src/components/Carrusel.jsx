@@ -4,7 +4,7 @@ function Carrusel() {
   return (
     <Carousel>
       <Carousel.Item>
-        <Imagen text="First slide" />
+        <Imagen text="First slide" url={"../Images/calvin-klein-923529.jpg"} />
         <Carousel.Caption>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
