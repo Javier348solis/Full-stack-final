@@ -30,8 +30,8 @@ class Productos(models.Model):
 
 class DatosCompras(models.Model):
     uniqueId = models.AutoField(primary_key=True) 
-    foreignKey = models.ForeignKey(UserRegistro, on_delete=models.CASCADE) 
-    foreignKey2 = models.ForeignKey(Productos, on_delete=models.CASCADE)#El objetivo es que haga relacion con UserRegisytro
+    DatosPerfu = models.ForeignKey(UserRegistro, on_delete=models.CASCADE) 
+    DatosProductos = models.ForeignKey(Productos, on_delete=models.CASCADE)#El objetivo es que haga relacion con UserRegisytro
     nombre_producto = models.CharField(max_length=255)
     cantidad_botellas = models.IntegerField()
     precio_total = models.DecimalField(max_digits=10, decimal_places=4)
@@ -43,11 +43,18 @@ class DatosCompras(models.Model):
     
 class StockProductos(models.Model):
     iniqueId = models.AutoField(primary_key=True)
-    foreignKey = models.ForeignKey(Productos, on_delete=models.CASCADE)
+    Stock = models.ForeignKey(Productos, on_delete=models.CASCADE)
     cantidad_disponible = models.IntegerField()
    
   
     def __str__(self):
         return f'{self.nombre_producto} - {self.cantidad_disponible} disponibles'
     
+# construir un nvo modelo Carrito con la relacion al usuario que esta comprando, una relacion multiple al producto, una fecha de compra Y el total
+class Carrito(models.Model):
+    productos = models.ManyToManyField(Productos,related_name='relacion_productos')
+    nombre_producto = models.CharField(max_length=255)
+    fecha_compra = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey(UserRegistro,on_delete=models.CASCADE)
+
 

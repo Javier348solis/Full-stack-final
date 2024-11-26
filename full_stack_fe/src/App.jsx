@@ -5,6 +5,7 @@ import './App.css'
 import FormLogin from './pages/Formlogin'
 import FormRegistro from './pages/FormRegistro'
 import Home from './pages/Home'
+import Routing from './Rutas/Routing'
 
 
 
@@ -13,7 +14,7 @@ function App() {
 
   return (
     <>
-  <Home/>
+    
     </>
   )
 }
