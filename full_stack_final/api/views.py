@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer
+from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer, ModiProductosSerializer
 from .models import Productos, UserRegistro, StockProductos, DatosCompras
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView,UpdateAPIView
 # Create your views here.
 class RegistrarUsuarioView(APIView):
     def post(self,request):
@@ -60,3 +60,40 @@ class StockView(ListCreateAPIView):
 class DatosComprasView(ListCreateAPIView):
     queryset = DatosCompras.objects.all()
     serializer_class = DatosComprasSerializer
+    
+# def get_productos(request):
+#     product = Productos.objects.all()
+#     serializer = ModiProductosSerializer(product, many=True)
+#     return Response(serializer.data)
+
+# def add_productos(request):
+#     if request.method == 'Post':
+#         serializer = ModiProductosSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ProductoUpdate(UpdateAPIView):
+    queryset = Productos.objects.all()
+    serializer_class = ProductosSerializer
+    lookup_field = 'uniqueId'
+
+# def update_product(request, pk):
+#     try:
+#         producto = Productos.objects.get(pk=pk)
+#     except Productos.DoesNotExist:
+#         return Response({'error': 'Producto no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+#     serializer = ModiProductosSerializer(producto, data=request.data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return Response(serializer.data)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST )
+
+# def delete_producto(request, pk):
+#     try:
+#         producto = Productos.objects.get(pk=pk)
+#     except Productos.DoesNotExist:
+#         return Response({'error': 'Producto no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+#     producto.delete()
+#     return Response(status=status.HTTP_204_NO_CONTENT)
