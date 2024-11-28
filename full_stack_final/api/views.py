@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import authenticate
-from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer, ModiProductosSerializer
+from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer
 from .models import Productos, UserRegistro, StockProductos, DatosCompras
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.generics import ListCreateAPIView,UpdateAPIView, DestroyAPIView

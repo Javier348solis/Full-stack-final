@@ -3,7 +3,7 @@ import React, { createContext, useState, useContext } from 'react';
 // Crear el contexto del carrito y se puede almacenar la informacion que se desee demtro de este contexto
 const CarritoContext = createContext();
 
-// Crear el proveedor del contexto
+// Crear el proveedor del contexto para que de eesta manera cuando se use en otros componentes, puedan acceder a ella 
 export const CarritoProvider = ({ children }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ export const CarritoProvider = ({ children }) => {
  
   const eliminarProducto = async (uniqueId) => {
     try {
-      const response = await fetch(`/productos/delete/${uniqueId}/`, {
+      const response = await fetch(`http://127.0.0.1:8000/productos/delete/${uniqueId}/`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Error al eliminar el producto');
@@ -38,7 +38,7 @@ export const CarritoProvider = ({ children }) => {
   // Editar cantidad de un producto usando Fetch
   const editarCantidad = async (uniqueId, cantidad) => {
     try {
-      const response = await fetch(`/productos/update/${uniqueId}/`, {
+      const response = await fetch(`http://127.0.0.1:8000/productos/update/${uniqueId}/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
