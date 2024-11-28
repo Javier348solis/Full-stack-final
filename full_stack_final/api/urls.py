@@ -1,6 +1,6 @@
 from django.urls import path,include
 from .views import InicioSesionView, ProductoView, RegistrarAdminView, StockView
-from .views import RegistrarUsuarioView, DatosComprasView,ProductoUpdate
+from .views import RegistrarUsuarioView, DatosComprasView,ProductoUpdate, ProductoDelete
 
 urlpatterns = [
     path("registro-usuario/", RegistrarUsuarioView.as_view(), name=""),
@@ -10,5 +10,6 @@ urlpatterns = [
     path("stock-productos", StockView.as_view()),
     path("datos-compras", DatosComprasView.as_view()),
     path('productos/update/<int:uniqueId>/', ProductoUpdate.as_view(), name='update_producto'),
+    path('productos/delete/<int:uniqueId>/', ProductoDelete.as_view(), name='delete_producto'),
 ]
 

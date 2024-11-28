@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate
 from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer, ModiProductosSerializer
 from .models import Productos, UserRegistro, StockProductos, DatosCompras
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.generics import ListCreateAPIView,UpdateAPIView
+from rest_framework.generics import ListCreateAPIView,UpdateAPIView, DestroyAPIView
 # Create your views here.
 class RegistrarUsuarioView(APIView):
     def post(self,request):
@@ -75,6 +75,11 @@ class DatosComprasView(ListCreateAPIView):
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class ProductoUpdate(UpdateAPIView):
+    queryset = Productos.objects.all()
+    serializer_class = ProductosSerializer
+    lookup_field = 'uniqueId'
+    
+class ProductoDelete(DestroyAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
     lookup_field = 'uniqueId'
