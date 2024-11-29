@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
+
 # class UserRegistro(models.Model):
 #     uniqueID = models.AutoField(primary_key=True) #Esto incrementa como una llave primaria
 #     foreignKey = models.ForeignKey('self', on_delete=models.SET_NULL=True, blank=True) #Esto lo que hace es que relaciona con otras tablas(Si fuera necesario)
@@ -24,8 +26,11 @@ class Productos(models.Model):
     cantidad_ml = models.IntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     marca= models. CharField(max_length=255)
+    imagen = models.ImageField(upload_to='productos/',null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])  # type: ignore
+
     
-    def __str__(self):
+    
+    def __str__(self): 
         return self.nombre_producto
 
 class DatosCompras(models.Model):

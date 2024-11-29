@@ -1,19 +1,18 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: black;
-  padding: 10px 20px;
-  color: white;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  overflow: visible; /* Asegúrate de que el contenido no se recorte */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: visible; /* Asegúrate de que el contenido no se recorte */
 }
 
-  
   .logo img {
     height: 100px; 
     width: 100px;

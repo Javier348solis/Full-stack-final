@@ -1,14 +1,14 @@
 import React, { createContext, useState, useContext } from 'react';
 
-// Crear el contexto del carrito y se puede almacenar la informacion que se desee demtro de este contexto
+// Crear el contexto del carrito
 const CarritoContext = createContext();
 
-// Crear el proveedor del contexto para que de eesta manera cuando se use en otros componentes, puedan acceder a ella 
+// Crear el proveedor del contexto
 export const CarritoProvider = ({ children }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
+  // Cargar los productos en el carrito desde la API
   const cargarCarrito = async () => {
     try {
       const response = await fetch('http://127.0.0.1:8000/api/');
@@ -22,7 +22,7 @@ export const CarritoProvider = ({ children }) => {
     }
   };
 
- 
+  // Eliminar un producto del carrito
   const eliminarProducto = async (uniqueId) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/productos/delete/${uniqueId}/`, {
@@ -35,7 +35,7 @@ export const CarritoProvider = ({ children }) => {
     }
   };
 
-  // Editar cantidad de un producto usando Fetch
+  // Editar la cantidad de un producto en el carrito
   const editarCantidad = async (uniqueId, cantidad) => {
     try {
       const response = await fetch(`http://127.0.0.1:8000/productos/update/${uniqueId}/`, {
@@ -55,8 +55,13 @@ export const CarritoProvider = ({ children }) => {
     }
   };
 
+  // Función para agregar un producto al carrito
+  const agregarProductoAlCarrito = (producto) => {
+    setProductos((prevProductos) => [...prevProductos, producto]);
+  };
+
   return (
-    <CarritoContext.Provider value={{ productos, loading, cargarCarrito, eliminarProducto, editarCantidad }}>
+    <CarritoContext.Provider value={{ productos, loading, cargarCarrito, eliminarProducto, editarCantidad, agregarProductoAlCarrito }}>
       {children}
     </CarritoContext.Provider>
   );
@@ -64,3 +69,4 @@ export const CarritoProvider = ({ children }) => {
 
 // Hook para acceder al contexto en cualquier componente
 export const useCarrito = () => useContext(CarritoContext);
+
