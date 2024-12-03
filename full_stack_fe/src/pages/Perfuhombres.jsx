@@ -52,7 +52,7 @@ const PerfuHombres = () => {
               src={producto.imagen}
               alt={producto.nombre_producto}
               className="product-image"
-              onClick={() => openModal(producto)} // Abrir el modal al hacer clic
+              onClick={() => openModal(producto)} 
             />
             <div className="product-card-body">
               <h3>{producto.nombre_producto}</h3>

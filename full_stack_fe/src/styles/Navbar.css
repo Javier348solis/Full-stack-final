@@ -58,6 +58,7 @@
     display: flex;
     align-items: center; /* Centra la imagen verticalmente */
     justify-content: center; /* Centra la imagen horizontalmente si es necesario */
+    margin-right: 20px;
 }
 
 
