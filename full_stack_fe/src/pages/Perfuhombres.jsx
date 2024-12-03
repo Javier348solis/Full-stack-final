@@ -44,7 +44,7 @@ const PerfuHombres = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <div className="product-container">
         {productos.map((producto) => (
           <div key={producto.uniqueId} className="product-card">

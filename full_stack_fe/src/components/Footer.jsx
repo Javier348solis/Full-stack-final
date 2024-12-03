@@ -1,7 +1,9 @@
  import React from 'react'
  import '../styles/Footer.css'
+ import { useNavigate } from 'react-router-dom';
  
  function Footer() {
+  const navigate = useNavigate();
    return (
     <footer className="footer">
     <div className="footer-content">
@@ -11,7 +13,7 @@
       </div>
       <div className="footer-column">
         <h4>Contacto</h4>
-        <a href="mailto:contacto@empresa.com">contacto@empresa.com</a>
+        <a onClick={() => navigate("/Contacto")} href="">Formulario de contacto</a>
         <a href="tel:+1234567890">+1 234 567 890</a>
       </div>
       <div className="footer-column">
@@ -21,6 +23,7 @@
       <div className="footer-column">
         <h4>Redes Sociales</h4>
         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
       </div>
     </div>

@@ -5,6 +5,7 @@ import FormLogin from '../pages/Formlogin';
 import Ofertas from '../pages/Ofertas';
 import PerfuMujer from '../pages/Perfumujer';
 import PerfuHombres from '../pages/Perfuhombres';
+import Contacto from '../components/Contacto';
 import { useState } from 'react';
 
 const Routing=()=>{
@@ -18,6 +19,7 @@ const Routing=()=>{
                 <Route path='/ofertas' element={<Ofertas/>}/>
                 <Route path='/mujeres' element={<PerfuMujer/>}/>
                 <Route path='/hombres' element={<PerfuHombres/>}/>
+                <Route path='/contacto' element={<Contacto/>}/>
             </Routes>
     </Router>
     )
