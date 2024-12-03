@@ -1,10 +1,12 @@
 /* Estilos generales */
 .product-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  padding-top: 120px; /* Agrega un espaciado superior para evitar que el navbar lo cubra */
+}
+
   
   /* Tarjetas de productos */
   .product-card {
