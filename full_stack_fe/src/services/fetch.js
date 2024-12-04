@@ -1,4 +1,7 @@
 const apiUrl = "http://127.0.0.1:8000/api/"
+
+const imgURL = "https://api.cloudinary.com/v1_1/dz4ghehm5/upload"
+
 const obtenerUsuario = async (endpoint) => {
     try {
       const response = await fetch(apiUrl + endpoint);
@@ -34,6 +37,31 @@ const obtenerUsuario = async (endpoint) => {
     }
   };
   export { guardarUsuario }
+
+  //POST Imagenes
+  const guardarImagenes = async (file, preset) => {
+    try {
+      const formData = new FormData();
+      
+
+      formData.append('file', file)
+      formData.append('upload_preset', preset)
+
+      const response = await fetch(imgURL , {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error('Error al guardar las imágenes:', error);
+    }
+  };
+  
+  export { guardarImagenes };  
+  
 
 //Put
 async function actualizaDatos(id, obj) {

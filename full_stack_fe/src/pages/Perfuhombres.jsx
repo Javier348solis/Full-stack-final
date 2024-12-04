@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useCarrito } from "../components/Carrito";
 import '../styles/Paginahombre.css'
+import FormAdministrador from "../components/FormAdministrador";
 
 const PerfuHombres = () => {
   const { agregarProductoAlCarrito } = useCarrito();
@@ -44,29 +45,32 @@ const PerfuHombres = () => {
 
   return (
     <>
-      <Navbar/>
-      <div className="product-container">
-        {productos.map((producto) => (
-          <div key={producto.uniqueId} className="product-card">
-            <img
-              src={producto.imagen}
-              alt={producto.nombre_producto}
-              className="product-image"
-              onClick={() => openModal(producto)} 
-            />
-            <div className="product-card-body">
-              <h3>{producto.nombre_producto}</h3>
-              <p>Precio: ${producto.precio}</p>
-              <button
-                className="add-to-cart-button"
-                onClick={() => agregarProductoAlCarrito(producto)}
-              >
-                Añadir al carrito
-              </button>
-            </div>
-          </div>
-        ))}
+    <Navbar />
+<div className="product-container">
+  {productos.map((producto) => (
+    <div key={producto.uniqueId} className="product-card">
+      <img
+        src={producto.imagen}
+        alt={producto.nombre_producto}
+        className="product-image"
+        onClick={() => openModal(producto)} 
+      />
+      <div className="product-card-body">
+        <h3>{producto.nombre_producto}</h3>
+        <p>Precio: ${producto.precio}</p>
+        <button
+          className="add-to-cart-button"
+          onClick={() => agregarProductoAlCarrito(producto)}
+        >
+          Añadir al carrito
+        </button>
       </div>
+    </div>
+  ))}
+</div>
+
+<FormAdministrador /> 
+       
 
       {modalOpen && selectedProducto && (
         <div className="modal">
@@ -93,7 +97,9 @@ const PerfuHombres = () => {
             >
               Añadir al carrito
             </button>
+            
           </div>
+          
         </div>
       )}
     </>

@@ -26,7 +26,7 @@ class Productos(models.Model):
     cantidad_ml = models.IntegerField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     marca= models. CharField(max_length=255)
-    imagen = models.ImageField(upload_to='productos/',null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])  # type: ignore
+    imagen= models.TextField()
 
     
     
