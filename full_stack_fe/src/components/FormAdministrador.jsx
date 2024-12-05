@@ -41,7 +41,7 @@ const FormAdministrador = () =>{
               <input onChange={(e) => setNombre(e.target.value)} type="text" placeholder="Nombre Producto"/>
               <input onChange={(e) => setCantidad(e.target.value)} type="number" placeholder="Cantidad ML"/>
               <input onChange={(e) => setPrecio(e.target.value)} type="text" placeholder="Precio"/>
-              <input onChange={(e) => setMarca(e.target.value)} type="text" placeholder="Marca"/>
+              <input onChange={(e) => setMarca (e.target.value)} type="text" placeholder="Marca"/>
               <input onChange={(e)=>setFile(e.target.files[0])} type="file" placeholder="Seleccione una imagen" required/>
               <input onChange={(e) => setDescripcion(e.target.value)} type="text" placeholder="Descripcion"/>
               <button onClick={subirProducto}>Agregar Producto </button>      

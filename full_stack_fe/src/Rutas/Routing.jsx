@@ -15,6 +15,7 @@ const Routing=()=>{
     <Router>
             <Routes>
                 <Route path='/' element={<Home/>}/>
+                <Route path='/registro'  element={<FormRegistro/>} />
                 <Route path='/login'  element={<FormLogin/>} />
                 <Route path='/ofertas' element={<Ofertas/>}/>
                 <Route path='/mujeres' element={<PerfuMujer/>}/>
