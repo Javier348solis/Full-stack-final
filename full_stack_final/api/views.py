@@ -8,6 +8,7 @@ from .serializers import ProductosSerializer, StockProductosSerializer, DatosCom
 from .models import Productos, UserRegistro, StockProductos, DatosCompras
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.generics import ListCreateAPIView,UpdateAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated,BasePermission,AllowAny
 # Create your views here.
 class RegistrarUsuarioView(APIView):
     def post(self,request):
@@ -20,8 +21,9 @@ class RegistrarUsuarioView(APIView):
             return Response({"error":"El usuario NO se pudo crear",},status=status.HTTP_400_BAD_REQUEST)
         else:
             nuevo_usuario = User.objects.create_user(username=nombre_usuario,email=correo_usuario,password=clave_usuario)
+            token = RefreshToken.for_user(nuevo_usuario)
             UserRegistro.objects.create(user=nuevo_usuario,telefono=telefono_usuario)
-            return Response({"success":"El usuario SÍ se pudo crear",},status=status.HTTP_201_CREATED)
+            return Response({"success":"El usuario SÍ se pudo crear",'token_acceso:':str(token.access_token)},status=status.HTTP_201_CREATED)
 
 class RegistrarAdminView(APIView):
     def post(self,request):
@@ -52,6 +54,13 @@ class InicioSesionView(APIView):
 class ProductoView(ListCreateAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
+    
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [AllowAny()]  # Si no esta autenticado puede hacer get
+        return [IsAuthenticated()]  # Requiere autenticación para POST (crear producto)
+
+# Para otros métodos, usar permisos predeterminados
     
 class StockView(ListCreateAPIView):
     queryset = StockProductos.objects.all()
