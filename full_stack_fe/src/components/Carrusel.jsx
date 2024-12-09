@@ -5,32 +5,36 @@ import '../styles/Carrusel.css';
 import { useCarrito } from './Carrito';
 
 function Carrusel() {
-  const { agregarProductoAlCarrito } = useCarrito(); // Asegúrate de que esta función esté correctamente definida en el hook useCarrito
+  const { agregarProductoAlCarrito } = useCarrito();
 
-  // Productos definidos (puedes cargarlos desde una API si lo deseas)
   const productos = [
     {
       uniqueId: 1,
       nombre_producto: 'Versace eros Energy (2024)',
       precio: 50000,
-      imagen_url: 'src/Images/versace-eros.jpg',  // Asegúrate de que esta ruta sea correcta
+      imagen_url: 'src/Images/versace-eros.jpg',
     },
     {
       uniqueId: 2,
       nombre_producto: 'Polo Green',
       precio: 46000,
-      imagen_url: 'src/Images/POLO PERFUME.JPG',  // Ruta corregida (sin espacios)
+      imagen_url: 'src/Images/POLO PERFUME.JPG',
     },
     {
       uniqueId: 3,
       nombre_producto: 'Versace eros EDT',
       precio: 44000,
-      imagen_url: 'src/Images/versace eros.jpg',  // Ruta corregida (sin espacios)
+      imagen_url: 'src/Images/versace eros.jpg',
     },
   ];
 
   return (
-    <Carousel interval={5000} className="custom-carousel">
+    <Carousel
+      interval={5000}
+      className="custom-carousel"
+      nextLabel="Siguiente"
+      prevLabel="Anterior"
+    >
       {productos.map((producto) => (
         <Carousel.Item key={producto.uniqueId}>
           <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
@@ -39,7 +43,7 @@ function Carrusel() {
             <p>Oferta: ₡{producto.precio.toLocaleString()}</p>
             <button
               className="btn btn-primary"
-              onClick={() => agregarProductoAlCarrito(producto)} // Asegúrate de que esta función esté disponible
+              onClick={() => agregarProductoAlCarrito(producto)}
             >
               Comprar
             </button>

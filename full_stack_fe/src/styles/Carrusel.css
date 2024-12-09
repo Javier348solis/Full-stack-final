@@ -1,17 +1,16 @@
-.custom-carousel .carousel-item img {
-  width: 350px;
-  height: 500px; 
-  object-fit: cover; 
-  margin: 0 auto; 
-  object-fit: cover; /* Asegura que la imagen no se distorsione */
-  margin: 0 20px; 
+.custom-carousel {
+  background-color: #010123;
+  padding: 20px 20px; /* Espacio alrededor del carrusel */
+  position: relative;
+  margin-top: 120px; /* Espacio entre el carrusel y el navbar */
 }
 
-.custom-carousel {
-  background-color: #010123; 
-  display: flex;
-  justify-content: center;
-  padding: 0 20px; /* Espacio en los lados del carrusel */
+/* Imágenes del carrusel */
+.custom-carousel .carousel-item img {
+  width: 350px;
+  height: 500px;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 .carousel-inner {
@@ -21,19 +20,53 @@
 
 .carousel-item {
   display: flex;
-  justify-content: center; 
-  flex-direction: column; 
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
 }
 
 .carousel-caption {
-  width: 350px; 
-  text-align: center; 
-  background-color: rgba(0, 0, 0, 0.5); 
-  color: white; /
-  padding: 10px 0; 
-  margin-top: -10px;
+  width: 350px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
 }
-.carousel{
+
+/* Botones de navegación */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%; /* Centra los botones verticalmente */
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  color: white;
+  width: 50px; /* Tamaño de los botones */
+  height: 50px;
+  border-radius: 50%; /* Forma circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-control-prev {
+  left: -60px; /* Ajusta la distancia del botón al lado izquierdo del carrusel */
+}
+
+.carousel-control-next {
+  right: -60px; /* Ajusta la distancia del botón al lado derecho del carrusel */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: #ff8c00; /* Cambia el color del fondo al pasar el mouse */
+}
+
+/* Espaciado superior del carrusel */
+.carousel {
   padding-top: 120px;
+}
+
+/* Eliminación de líneas verdes */
+.custom-carousel::before {
+  content: none; /* Elimina el pseudo-elemento responsable de las líneas verdes */
 }
