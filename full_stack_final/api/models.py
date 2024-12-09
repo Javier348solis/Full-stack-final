@@ -27,6 +27,9 @@ class Productos(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     marca= models. CharField(max_length=255)
     imagen= models.TextField()
+    genero = models.CharField(
+        max_length=10, choices=[('Hombre', 'Hombre'), ('Mujer', 'Mujer')],default='Hombre',
+    )
 
     
     
