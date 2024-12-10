@@ -1,70 +1,67 @@
-body{
+/* Fondo negro para la página */
+body {
   background-color: black !important;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
+/* Estilos del contenedor principal */
 .login-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-  }
-  
-  .login-form-container {
-    flex: 1;
-    background-color: rgb(1, 3, 38); 
-    opacity: 0.6;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    color: white;
-    text-align: center;
-  }
-  
-  .login-container::after {
-    content: '';
-    flex: 1;
-    background-image: url('../Images/calvin-klein-923529.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .login-form-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .login-form-container input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 80%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .login-form-container button {
-    padding: 10px 20px;
-    background-color: #f4f2ea; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .login-form-container a {
-    margin-top: 10px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .login-form-container a:hover {
-    text-decoration: underline;
-  }
-  button{
-    color: black;
-    width: 300px;
-  }
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
 
-  input:focus {
-    border-color: #4CAF50;
-  }
+/* Estilos del contenedor del formulario (mitad izquierda) */
+.login-form-container {
+  flex: 1; /* Tomará el 50% del ancho */
+  background-color: rgb(1, 3, 38); 
+  opacity: 0.8; /* Opacidad para permitir ver la imagen ligeramente */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+}
+
+/* Imagen de fondo para la mitad derecha */
+.login-container::after {
+  content: '';
+  flex: 1; /* Ocupa la otra mitad */
+  background-image: url('../Images/calvin-klein-923529.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8; /* Añadir opacidad para que no opaque demasiado el formulario */
+}
+
+/* Título en la parte superior del formulario */
+.login-form-container h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Enlaces de texto */
+.login-form-container a {
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-form-container a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo del botón (ya se maneja con Material UI, pero ajustamos algo más) */
+button {
+  color: black;
+  width: 300px;
+}
+
+/* Estilos de enfoque en los inputs */
+input:focus {
+  border-color: #4CAF50;
+}

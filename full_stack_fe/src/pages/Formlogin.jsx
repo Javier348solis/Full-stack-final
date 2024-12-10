@@ -3,12 +3,14 @@ import '../styles/Login.css';
 import { obtenerUsuario, guardarUsuario } from '../services/fetch'; 
 import { useNavigate } from 'react-router-dom';
 
+// Importar componentes de Material UI
+import { Box, TextField, Button, Typography } from '@mui/material';
+
 function FormLogin() {
-const navegar = useNavigate();
+  const navegar = useNavigate();
 
   // Definición de estados para los campos de formulario
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Función para manejar el submit del formulario
@@ -28,13 +30,12 @@ const navegar = useNavigate();
 
     try {
       // Aquí puedes hacer una llamada POST si deseas verificar el usuario o iniciar sesión
-      const data = await guardarUsuario(usuarioLogin,`login-usuario/`);
+      const data = await guardarUsuario(usuarioLogin, `login-usuario/`);
       console.log(data);
-      if(data.success){
-        console.log("entre");
-      }if(!data.token){
-        alert("no entre");
-        
+      if (data.success) {
+        console.log('Inicio de sesión exitoso');
+      } else if (!data.token) {
+        alert('Error de inicio de sesión');
       }
       // Si es exitoso, podrías redirigir al usuario a otra página o mostrar un mensaje
     } catch (error) {
@@ -44,32 +45,103 @@ const navegar = useNavigate();
 
   return (
     <div className="login-container">
-      <div className="login-form-container">
-        <h1>Inicio de Sesión</h1>
+      <Box
+        className="login-form-container"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        p={3}
+        borderRadius={2}
+        boxShadow={3}
+        bgcolor="rgba(1, 3, 38, 0.6)" // Fonde de opacidad
+        maxWidth={400}
+        mx="auto"
+      >
+        <Typography variant="h4" gutterBottom>
+          Inicio de Sesión
+        </Typography>
         <form onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="Nombre Completo" 
+          <TextField 
+            label="Nombre Completo" 
+            variant="outlined" 
+            fullWidth 
+            margin="normal"
             value={username}
-            onChange={(e) => setUsername(e.target.value)} 
+            onChange={(e) => setUsername(e.target.value)}
+            InputLabelProps={{
+              style: { color: 'white' }  // Cambiar el color del label
+            }}
+            inputProps={{
+              style: { color: 'white' } // Cambiar el color del texto
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white',  // Cambiar el borde a blanco
+                },
+                '&:hover fieldset': {
+                  borderColor: '#4CAF50',  // Cambiar el borde al pasar el mouse
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#4CAF50',  // Cambiar el borde cuando está enfocado
+                },
+              },
+            }}
           />
-          {/* <input 
-            type="email" 
-            placeholder="Correo electrónico" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} 
-          /> */}
-          <input 
+          <TextField 
+            label="Contraseña" 
             type="password" 
-            placeholder="Contraseña" 
+            variant="outlined" 
+            fullWidth 
+            margin="normal"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} 
+            onChange={(e) => setPassword(e.target.value)}
+            InputLabelProps={{
+              style: { color: 'white' }
+            }}
+            inputProps={{
+              style: { color: 'white' }
+            }}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'white', 
+                },
+                '&:hover fieldset': {
+                  borderColor: '#4CAF50', 
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: '#4CAF50', 
+                },
+              },
+            }}
           />
-          <button onClick={() => navegar("/")} type="submit">Ingresar</button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            sx={{
+              mt: 2,
+              backgroundColor: '#f4f2ea',
+              color: 'black',
+              '&:hover': {
+                backgroundColor: '#f4f2ea',
+              }
+            }}
+            onClick={() => navegar("/")}
+          >
+            Ingresar
+          </Button>
         </form>
-        <a href="">No tienes una cuenta? Regístrate aquí</a>
-        <a href="">¿Olvidaste tu contraseña?</a>
-      </div>
+        <Box mt={2}>
+          <a href="/registro">No tienes una cuenta? Regístrate aquí</a>
+        </Box>
+        <Box mt={1}>
+          <a href="#">¿Olvidaste tu contraseña?</a>
+        </Box>
+      </Box>
     </div>
   );
 }
