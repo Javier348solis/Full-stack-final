@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
 import { obtenerUsuario, guardarUsuario } from '../services/fetch'; 
+import { useNavigate } from 'react-router-dom';
 
 function FormLogin() {
+const navegar = useNavigate();
+
   // Definición de estados para los campos de formulario
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -62,7 +65,7 @@ function FormLogin() {
             value={password}
             onChange={(e) => setPassword(e.target.value)} 
           />
-          <button type="submit">Ingresar</button>
+          <button onClick={() => navegar("/")} type="submit">Ingresar</button>
         </form>
         <a href="">No tienes una cuenta? Regístrate aquí</a>
         <a href="">¿Olvidaste tu contraseña?</a>

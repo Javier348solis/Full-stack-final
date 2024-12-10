@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Registro.css';
 import { guardarUsuario, obtenerUsuario } from '../services/fetch';
 
@@ -8,6 +9,7 @@ function FormRegistro() {
   const [email, setEmail] = useState('');
   const [numero, setNumero] = useState('');
   const [datos, setDatos] = useState([]);
+  const navegar = useNavigate();
 
   // Función para validar los campos
   const validarEspacios = () => {
@@ -76,7 +78,7 @@ function FormRegistro() {
           value={numero}
           onChange={(e) => setNumero(e.target.value)}
         />
-        <button type="submit">Registrarse</button>
+        <button onClick={() => navegar("/login")} type="submit">Registrarse</button>
         <a href="/login" className='account-login'>Ya tienes una cuenta?</a>
       </form>
     </div>
