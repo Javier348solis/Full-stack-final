@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography } from '@mui/material';
 import { guardarUsuario } from '../services/fetch';
 import '../styles/Registro.css';
@@ -53,7 +53,7 @@ function FormRegistro() {
     <div className="contenedor-registro">
       {/* Formulario */}
       <div className="contenedor-formulario">
-        <Typography variant="h4" className="Titulo">
+        <Typography variant="h4" color="primary" sx={{paddingBottom: 2}}>
           Registro
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -97,6 +97,7 @@ function FormRegistro() {
             color="primary"
             fullWidth
             sx={{ marginTop: '15px' }}
+            onClick={() => navegar("/login")}
           >
             Registrarse
           </Button>
@@ -110,12 +111,12 @@ function FormRegistro() {
             }}
           >
             ¿Ya tienes una cuenta?{' '}
-            <Button
-              onClick={() => navegar('/login')}
+            <Link
+              to="/login"
               sx={{ textDecoration: 'underline', marginLeft: '5px' }}
             >
               Inicia sesión
-            </Button>
+            </Link>
           </Typography>
         </form>
       </div>

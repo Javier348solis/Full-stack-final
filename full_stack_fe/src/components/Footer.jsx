@@ -1,38 +1,59 @@
- import React from 'react'
- import '../styles/Footer.css'
- import { useNavigate } from 'react-router-dom';
- 
- function Footer() {
+import React from 'react';
+import '../styles/Footer.css';
+import { useNavigate } from 'react-router-dom';
+import { Grid, Typography, Link, Box } from '@mui/material';
+
+function Footer() {
   const navigate = useNavigate();
-   return (
+
+  return (
     <footer className="footer">
-    <div className="footer-content">
-      <div className="footer-column">
-        <h4>Ubicación</h4>
-        <a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">Dirección de la empresa</a>
-      </div>
-      <div className="footer-column">
-        <h4>Contacto</h4>
-        <a onClick={() => navigate("/Contacto")} href="">Formulario de contacto</a>
-        <a href="tel:+1234567890">+1 234 567 890</a>
-      </div>
-      <div className="footer-column">
-        <h4>Acerca de Nosotros</h4>
-        <a href="/acerca-de-nosotros">Más información sobre la empresa</a>
-      </div>
-      <div className="footer-column">
-        <h4>Redes Sociales</h4>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
-        <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
-      </div>
-    </div>
-    <div className="footer-rights">
-      <p>&copy; 2024 Derechos reservados</p>
-    </div>
-  </footer>
-   )
- }
- 
- export default Footer
- 
+      <Box sx={{ backgroundColor: '#333', padding: '2rem', color: 'white' }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={3}>
+            <Typography variant="h6">Ubicación</Typography>
+            <Link href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" color="inherit">
+              Dirección de la empresa
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Typography variant="h6">Contacto</Typography>
+            <Link onClick={() => navigate("/Contacto")} href="#" color="inherit">
+              Formulario de contacto
+            </Link>
+            <Link href="tel:+1234567890" color="inherit">
+              +1 234 567 890
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Typography variant="h6">Acerca de Nosotros</Typography>
+            <Link href="/acerca-de-nosotros" color="inherit">
+              Más información sobre la empresa
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Typography variant="h6">Redes Sociales</Typography>
+            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" color="inherit">
+              Facebook
+            </Link>
+            <Link href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" color="inherit">
+              WhatsApp
+            </Link>
+            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" color="inherit">
+              Instagram
+            </Link>
+          </Grid>
+        </Grid>
+
+        <Box sx={{ textAlign: 'center', marginTop: '1rem' }}>
+          <Typography variant="body2">&copy; 2024 Derechos reservados</Typography>
+        </Box>
+      </Box>
+    </footer>
+  );
+}
+
+export default Footer;

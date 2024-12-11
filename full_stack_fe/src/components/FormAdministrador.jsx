@@ -32,7 +32,7 @@ const FormAdministrador = () => {
             precio: precio,
             marca: marca,
             imagen: Url,
-            genero: genero, // Incluye el género
+            genero: genero, 
         };
         const peticion = await guardarUsuario(datosProductos, 'crear-producto/');
         console.log(peticion);

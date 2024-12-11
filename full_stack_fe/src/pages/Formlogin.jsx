@@ -34,6 +34,7 @@ function FormLogin() {
       console.log(data);
       if (data.success) {
         console.log('Inicio de sesión exitoso');
+        localStorage.setItem('access_token', data.token);
       } else if (!data.token) {
         alert('Error de inicio de sesión');
       }
@@ -133,6 +134,16 @@ function FormLogin() {
             onClick={() => navegar("/")}
           >
             Ingresar
+          </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ marginTop: '15px' }}
+            onClick={() => navegar("/login")}
+          >
+            Registrarse
           </Button>
         </form>
         <Box mt={2}>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, Button, InputBase, IconButton, Menu, MenuItem } from '@mui/material';
+import { ShoppingCart as ShoppingCartIcon, Search as SearchIcon } from '@mui/icons-material';
 import { useCarrito } from '../components/Carrito';
 
 const Navbar = () => {
@@ -12,35 +14,73 @@ const Navbar = () => {
     setShowCarrito(!showCarrito);  // Alternar la visibilidad del carrito
   };
 
+  // Manejo de menú de categorías
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <img onClick={() => navigate("/")} src="\src\Images\Logo.gif" alt="Logo" />
-      </div>
+    <AppBar position="sticky">
+      <Toolbar>
+        {/* Logo */}
+        <IconButton edge="start" color="inherit" onClick={() => navigate("/")}>
+          <img src="\src\Images\Logo.gif" alt="Logo" style={{ height: 40 }} />
+        </IconButton>
 
-      {/* Secciones de navegacioon */}
-      <div className="nav-links">
-        <a href="/ofertas">Ofertas</a>
-        <div className="dropdown">
-          <a href="#categorias" className="dropdown-toggle">Categorías</a>
-          <div className="dropdown-menu">
-            <a href="/hombres">Perfumería Hombre</a>
-            <a href="/mujeres">Perfumería Mujer</a>
-          </div>
+        {/* Enlaces de navegación */}
+        <div style={{ flexGrow: 1 }}>
+          <Button color="inherit" onClick={() => navigate("/ofertas")}>Ofertas</Button>
+          <Button
+            color="inherit"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleMenuOpen}
+          >
+            Categorías
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={() => navigate("/hombres")}>Perfumería Hombre</MenuItem>
+            <MenuItem onClick={() => navigate("/mujeres")}>Perfumería Mujer</MenuItem>
+          </Menu>
+          <Button color="inherit" onClick={() => navigate("/otros")}>Otros</Button>
         </div>
-        <a href="#otros">Otros</a>
-      </div>
 
-      {/* Barra de búsqueda */}
-      <div className="search-bar">
-        <input type="text" placeholder="Buscar productos..." />
-      </div>
+        {/* Barra de búsqueda */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <InputBase
+            placeholder="Buscar productos..."
+            startAdornment={<SearchIcon />}
+            style={{ color: 'white', paddingLeft: '10px' }}
+          />
+        </div>
 
-      {/* Carrito de compras */}
-      <div className="cart" onClick={handleCarritoClick}>
-        <img src="\src\Images\verificar (1).png" alt="Carrito" />
-        {productos.length > 0 && <span className="cart-count">{productos.length}</span>} {/* Muestra el número de productos en el carrito */}
-      </div>
+        {/* Carrito de compras */}
+        <IconButton color="inherit" onClick={handleCarritoClick}>
+          <ShoppingCartIcon />
+          {productos.length > 0 && (
+            <span style={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+              backgroundColor: 'red',
+              color: 'white',
+              borderRadius: '50%',
+              padding: '4px 8px',
+              fontSize: '12px'
+            }}>
+              {productos.length}
+            </span>
+          )}
+        </IconButton>
+      </Toolbar>
 
       {/* Popup del carrito */}
       {showCarrito && (
@@ -56,10 +96,10 @@ const Navbar = () => {
             ))}
           </ul>
           {productos.length === 0 && <p>No hay productos en el carrito.</p>}
-          <button onClick={() => navigate('/carrito')}>Ver Carrito Completo</button>
+          <Button onClick={() => navigate('/carrito')} variant="contained">Ver Carrito Completo</Button>
         </div>
       )}
-    </nav>
+    </AppBar>
   );
 };
 

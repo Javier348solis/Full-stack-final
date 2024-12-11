@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Imagen from './Imagen';
 import '../styles/Carrusel.css';
 import { useCarrito } from './Carrito';
+import { Button, Typography } from '@mui/material';
 
 function Carrusel() {
   const { agregarProductoAlCarrito } = useCarrito();
@@ -29,24 +30,21 @@ function Carrusel() {
   ];
 
   return (
-    <Carousel
-      interval={5000}
-      className="custom-carousel"
-      nextLabel="Siguiente"
-      prevLabel="Anterior"
-    >
+    <Carousel interval={5000} className="custom-carousel" nextLabel="Siguiente" prevLabel="Anterior">
       {productos.map((producto) => (
         <Carousel.Item key={producto.uniqueId}>
           <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
           <div className="carousel-caption">
-            <h3>{producto.nombre_producto}</h3>
-            <p>Oferta: ₡{producto.precio.toLocaleString()}</p>
-            <button
-              className="btn btn-primary"
+            <Typography variant="h6">{producto.nombre_producto}</Typography>
+            <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
+            <Button
+              variant="contained"
+              color="primary"
               onClick={() => agregarProductoAlCarrito(producto)}
+              sx={{ marginTop: '10px' }}
             >
               Comprar
-            </button>
+            </Button>
           </div>
         </Carousel.Item>
       ))}

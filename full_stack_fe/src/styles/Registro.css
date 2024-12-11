@@ -7,7 +7,7 @@
 }
 
 .contenedor-formulario {
-  background-color: #6b8f76;
+  background-color: #fff;
   padding: 2rem;
   border-radius: 10px;
   width: 100%;
@@ -15,7 +15,7 @@
 }
 
 .contenedor-imagen {
-  background-image: url('../Images/perfume-4661282.jpg');
+  background-image: url('../Images/perfume-new.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
