@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TextField, Button, Typography } from '@mui/material';
+import { guardarUsuario } from '../services/fetch';
 import '../styles/Registro.css';
-import { guardarUsuario, obtenerUsuario } from '../services/fetch';
 
 function FormRegistro() {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [numero, setNumero] = useState('');
-  const [datos, setDatos] = useState([]);
   const navegar = useNavigate();
 
   // Función para validar los campos
@@ -32,10 +32,9 @@ function FormRegistro() {
       username,
       password,
       email,
-      phone_number:numero
+      phone_number: numero,
     };
     console.log(usuario);
-    
 
     try {
       const data = await guardarUsuario(usuario, 'registro-usuario/');
@@ -51,39 +50,80 @@ function FormRegistro() {
   };
 
   return (
-    <div className='contenedor-registro'>
-      <h1>Registro</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder='Nombre completo'
-          value={username}
-          onChange={(e) => setUserName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder='Correo electrónico'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder='Contraseña'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder='Número telefónico'
-          value={numero}
-          onChange={(e) => setNumero(e.target.value)}
-        />
-        <button onClick={() => navegar("/login")} type="submit">Registrarse</button>
-        <a href="/login" className='account-login'>Ya tienes una cuenta?</a>
-      </form>
+    <div className="contenedor-registro">
+      {/* Formulario */}
+      <div className="contenedor-formulario">
+        <Typography variant="h4" className="Titulo">
+          Registro
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Nombre completo"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
+            sx={{ marginBottom: '15px' }}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            sx={{ marginBottom: '15px' }}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Contraseña"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            sx={{ marginBottom: '15px' }}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Número telefónico"
+            type="number"
+            value={numero}
+            onChange={(e) => setNumero(e.target.value)}
+            sx={{ marginBottom: '15px' }}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ marginTop: '15px' }}
+          >
+            Registrarse
+          </Button>
+          <Typography
+            variant="body2"
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginTop: '10px',
+              color: 'gray',
+            }}
+          >
+            ¿Ya tienes una cuenta?{' '}
+            <Button
+              onClick={() => navegar('/login')}
+              sx={{ textDecoration: 'underline', marginLeft: '5px' }}
+            >
+              Inicia sesión
+            </Button>
+          </Typography>
+        </form>
+      </div>
+
+      {/* Columna de la imagen */}
+      <div className="contenedor-imagen" />
     </div>
   );
 }
 
 export default FormRegistro;
-
