@@ -6,11 +6,11 @@ import Ofertas from '../pages/Ofertas';
 import PerfuMujer from '../pages/Perfumujer';
 import PerfuHombres from '../pages/Perfuhombres';
 import Contacto from '../components/Contacto';
+import Administrador from '../pages/Administrador';
 import { useState } from 'react';
+import RutasPrivadas from './Rutasprivadas';
 
 const Routing=()=>{
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    
     return(
     <Router>
             <Routes>
@@ -21,6 +21,7 @@ const Routing=()=>{
                 <Route path='/mujeres' element={<PerfuMujer/>}/>
                 <Route path='/hombres' element={<PerfuHombres/>}/>
                 <Route path='/contacto' element={<Contacto/>}/>
+                <Route path='/admin' element={<RutasPrivadas children={<Administrador/>} isAuthenticated={localStorage.getItem('admin')}/>}/>
             </Routes>
     </Router>
     )

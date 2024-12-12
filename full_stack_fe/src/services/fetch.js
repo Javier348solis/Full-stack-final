@@ -38,6 +38,28 @@ const obtenerUsuario = async (endpoint) => {
   };
   export { guardarUsuario }
 
+  //POST 
+  const guardarPost = async (obj, endpoint) => {
+    try {
+      const response = await fetch(apiUrl + endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        },
+        body: JSON.stringify(obj),
+      });
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error('Error al guardar el post:', error);
+    }
+  }
+  export { guardarPost }
+
+
+
   //POST Imagenes
   const guardarImagenes = async (file, preset) => {
     try {
@@ -63,13 +85,14 @@ const obtenerUsuario = async (endpoint) => {
   export { guardarImagenes };  
   
 
-//Put
+//Patch
 async function actualizaDatos(id, obj) {
     try {
       const response = await fetch(`http://127.0.0.1:8000/productos/${id}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
         },
         body: JSON.stringify(obj),
       });
@@ -93,7 +116,10 @@ async function deleteProduct(id) {
     try {
       const response = await fetch(`http://127.0.0.1:8000/productos/${id}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+         },
       });
   
       if (!response.ok) {

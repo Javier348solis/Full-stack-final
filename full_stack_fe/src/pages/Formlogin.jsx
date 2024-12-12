@@ -35,6 +35,7 @@ function FormLogin() {
       if (data.success) {
         console.log('Inicio de sesión exitoso');
         localStorage.setItem('access_token', data.token);
+        localStorage.setItem('admin', data.is_admin);
       } else if (!data.token) {
         alert('Error de inicio de sesión');
       }

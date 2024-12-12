@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/FormAdmin.css';
 import { useState } from "react";
-import { guardarImagenes, guardarUsuario } from "../services/fetch";
+import { guardarImagenes, guardarUsuario,guardarPost } from "../services/fetch";
 
 const FormAdministrador = () => {
     const [file, setFile] = useState(null);
@@ -34,7 +34,7 @@ const FormAdministrador = () => {
             imagen: Url,
             genero: genero, 
         };
-        const peticion = await guardarUsuario(datosProductos, 'crear-producto/');
+        const peticion = await guardarPost(datosProductos, 'crear-producto/');
         console.log(peticion);
     };
 

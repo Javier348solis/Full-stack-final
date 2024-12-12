@@ -69,7 +69,6 @@ const PerfuHombres = () => {
   ))}
 </div>
 
-<FormAdministrador /> 
        
 
       {modalOpen && selectedProducto && (
