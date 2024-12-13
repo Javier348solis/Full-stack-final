@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useCarrito } from "../components/Carrito";
-import '../styles/Paginahombre.css'
-import FormAdministrador from "../components/FormAdministrador";
+import '../styles/Paginahombre.css';
+import { useNavigate } from "react-router-dom";
 
 const PerfuHombres = () => {
   const { agregarProductoAlCarrito } = useCarrito();
@@ -10,7 +10,8 @@ const PerfuHombres = () => {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProducto, setSelectedProducto] = useState(null);
-
+  const navigate = useNavigate(); // Hook para navegar a otras páginas
+  
   // Cargar productos desde la API
   useEffect(() => {
     const fetchProductos = async () => {
@@ -18,7 +19,9 @@ const PerfuHombres = () => {
         const response = await fetch("http://127.0.0.1:8000/api/crear-producto/");
         if (!response.ok) throw new Error("Error al cargar los productos");
         const data = await response.json();
-        setProductos(data);
+        console.log(data)
+        const productosHombre = data.filter((producto)=> producto.genero === "Hombre");
+        setProductos(productosHombre);
         setLoading(false);
       } catch (error) {
         console.error("Error al cargar los productos:", error);
@@ -39,37 +42,39 @@ const PerfuHombres = () => {
     setModalOpen(false);
   };
 
+  const manejarAgregarProducto = (producto) => {
+    agregarProductoAlCarrito(producto);
+  };
+
   if (loading) {
     return <p>Cargando productos...</p>;
   }
 
   return (
     <>
-    <Navbar />
-<div className="product-container">
-  {productos.map((producto) => (
-    <div key={producto.uniqueId} className="product-card">
-      <img
-        src={producto.imagen}
-        alt={producto.nombre_producto}
-        className="product-image"
-        onClick={() => openModal(producto)} 
-      />
-      <div className="product-card-body">
-        <h3>{producto.nombre_producto}</h3>
-        <p>Precio: ${producto.precio}</p>
-        <button
-          className="add-to-cart-button"
-          onClick={() => agregarProductoAlCarrito(producto)}
-        >
-          Añadir al carrito
-        </button>
+      <Navbar />
+      <div className="product-container">
+        {productos.map((producto) => (
+          <div key={producto.uniqueId} className="product-card">
+            <img
+              src={producto.imagen}
+              alt={producto.nombre_producto}
+              className="product-image"
+              onClick={() => openModal(producto)}
+            />
+            <div className="product-card-body">
+              <h3>{producto.nombre_producto}</h3>
+              <p>Precio: ${producto.precio}</p>
+              <button
+                className="add-to-cart-button"
+                onClick={() => manejarAgregarProducto(producto)}
+              >
+                Añadir al carrito
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
-       
 
       {modalOpen && selectedProducto && (
         <div className="modal">
@@ -90,15 +95,13 @@ const PerfuHombres = () => {
             <button
               className="add-to-cart-button"
               onClick={() => {
-                agregarProductoAlCarrito(selectedProducto);
+                manejarAgregarProducto(selectedProducto);
                 closeModal();
               }}
             >
               Añadir al carrito
             </button>
-            
           </div>
-          
         </div>
       )}
     </>

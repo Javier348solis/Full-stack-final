@@ -43,7 +43,7 @@ function Carrusel() {
               onClick={() => agregarProductoAlCarrito(producto)}
               sx={{ marginTop: '10px' }}
             >
-              Comprar
+              Añadir al carrito
             </Button>
           </div>
         </Carousel.Item>

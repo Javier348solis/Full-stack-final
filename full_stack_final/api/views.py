@@ -52,16 +52,24 @@ class InicioSesionView(APIView):
                              },status=status.HTTP_200_OK)
         else:
             return Response({"error":"Usuario invalido",},status=status.HTTP_400_BAD_REQUEST)
-            
-            
+        
+        
 class ProductoView(ListCreateAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
-    
+
     def get_permissions(self):
         if self.request.method == 'GET':
-            return [AllowAny()]  # Si no esta autenticado puede hacer get
-        return [IsAdminUser()]  # Requiere ser super usuario para POST (crear producto)
+            return [AllowAny()]  # Permitir GET sin autenticación
+        return [IsAdminUser()]  # Requerir ser superusuario para POST
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        genero = self.request.query_params.get('genero')  # Obtener el filtro 'genero' de la URL
+        if genero:
+            queryset = queryset.filter(genero=genero)  # Filtrar por género si está presente
+        return queryset
+
 
 # Para otros métodos, usar permisos predeterminados    
 class StockView(ListCreateAPIView):

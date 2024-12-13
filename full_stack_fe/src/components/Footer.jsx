@@ -39,7 +39,12 @@ function Footer() {
             <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" color="inherit">
               Facebook
             </Link>
-            <Link href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer" color="inherit">
+            <Link 
+              href="https://wa.me/50685526923?text=Hola%20quiero%20más%20información%20sobre%20sus%20servicios" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              color="inherit"
+            >
               WhatsApp
             </Link>
             <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" color="inherit">
