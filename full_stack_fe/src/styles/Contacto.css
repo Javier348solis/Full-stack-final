@@ -1,29 +1,33 @@
-.Contenedor-contacto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+body {
+    background-color: #021931 !important; 
+    color: #ffffff; 
+    margin: 0;
+    font-family: Arial, sans-serif; 
+  }
+  
+  .Contenedor-contacto {
+    background-color: #f0f0f0; 
     padding: 20px;
-    background-color: rgb(3, 1, 55);
-    border: 40px solid black;
-}
-
-.titulo {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    color: white;
-}
-
-.Contenedor-formu {
-    border: 2px solid white;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;  /* Asegura que los labels estén encima de los inputs */
-    align-items: flex-start; /* Alinea todos los elementos al principio del contenedor */
-    gap: 20px; /* Agrega espacio entre los elementos */
-}
+    border-radius: 8px;
+    margin: 50px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .Contenedor-formu {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .titulo {
+    color: #333333; 
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  
 
 label {
     color: white;
@@ -31,28 +35,7 @@ label {
     align-self: flex-start;
 }
 
-input {
-    
-    border: 2px solid red;
-    border-radius: 5px;
-    width: 300px;
-    background-color: black;
-    color: white;
-}
 
-input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-.boton-form {
-    padding: 10px 20px;
-    background-color: white;
-    color: rgb(3, 3, 3);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(186, 3, 3, 0.5);
-    margin-top: 10px;
-}
+
+
 

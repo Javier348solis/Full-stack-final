@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography } from '@mui/material';
 import { guardarUsuario } from '../services/fetch';
 import '../styles/Registro.css';
-
+import Swal from 'sweetalert2'
 function FormRegistro() {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +14,13 @@ function FormRegistro() {
   // Función para validar los campos
   const validarEspacios = () => {
     if (!username || !password || !email || !numero) {
-      alert('Favor, llenar todos los espacios');
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Por favor, llene todos los espacios",
+        showConfirmButton: false,
+        timer: 3000
+      }); 
       return false;
     }
     return true;
@@ -38,6 +44,16 @@ function FormRegistro() {
 
     try {
       const data = await guardarUsuario(usuario, 'registro-usuario/');
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Usuario registrado satisfactoriamente",
+        showConfirmButton: false,
+        timer: 3000
+      });
+      setTimeout(() => {
+        navegar("/login")
+      }, 5000);
       console.log('Usuario registrado:', data);
       // Limpiar los campos del formulario
       setUserName('');
@@ -45,6 +61,13 @@ function FormRegistro() {
       setEmail('');
       setNumero('');
     } catch (error) {
+        Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Error al registrar ",
+        showConfirmButton: false,
+        timer: 3000
+      });
       console.error('Error al guardar el usuario:', error);
     }
   };
