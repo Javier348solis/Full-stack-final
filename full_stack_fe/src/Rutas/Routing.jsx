@@ -9,6 +9,7 @@ import PerfuHombres from '../pages/Perfuhombres';
 import Contacto from '../components/Contacto';
 import Administrador from '../pages/Administrador';
 import RutasPrivadas from './Rutasprivadas';
+import ProductosCarrito from '../pages/Productoscarrito';
 
 const Routing = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -29,6 +30,7 @@ const Routing = () => {
         <Route path='/hombres' element={<PerfuHombres />} />
         <Route path='/contacto' element={<Contacto />} />
         <Route path='/admin' element={<RutasPrivadas isAuthenticated={isAdmin} children={<Administrador />} />} />
+        <Route path='/carrito' element={<ProductosCarrito/>}/>
       </Routes>
     </Router>
   );

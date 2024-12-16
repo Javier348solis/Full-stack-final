@@ -1,0 +1,29 @@
+.carrito-producto {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+  
+  .carrito-producto img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 10px;
+  }
+  
+  .carrito-producto .detalles {
+    flex: 1;
+  }
+  
+  .carrito-producto button {
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
