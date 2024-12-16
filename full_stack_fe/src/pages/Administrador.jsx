@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import FormAdministrador from "../components/FormAdministrador";
 import Ventas from "../components/Ventas";
+import '../styles/Administrador.css';
 
 const PaginaAdministrador = () => {
   const [productos, setProductos] = useState([]);
@@ -61,7 +62,7 @@ const PaginaAdministrador = () => {
             />
             <div className="product-card-body">
               <h3>{producto.nombre_producto}</h3>
-              <p>Precio: ${producto.precio}</p>
+              <p className="letra-color">Precio: ₡{producto.precio}</p>
             </div>
           </div>
         

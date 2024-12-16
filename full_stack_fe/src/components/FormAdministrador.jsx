@@ -82,13 +82,7 @@ const FormAdministrador = () => {
                     />
                     <button onClick={subirProducto}>Agregar Producto</button>
                 </div>
-                <div className="contenedor-form-edit">
-                    <input type="text" placeholder="Nombre Producto" />
-                    <input type="number" placeholder="Editar ML" />
-                    <input type="file" placeholder="Seleccione una imagen" required />
-                    <input type="text" placeholder="Descripcion" />
-                    <button>Editar</button>
-                </div>
+               
             </div>
         </>
     );

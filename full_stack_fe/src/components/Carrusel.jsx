@@ -1,11 +1,11 @@
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'react-material-ui-carousel';
+import { Button, Typography, Box } from '@mui/material';
+import { useCarrito } from './Carrito';
 import Imagen from './Imagen';
 import '../styles/Carrusel.css';
-import { useCarrito } from './Carrito';
-import { Button, Typography } from '@mui/material';
 
-function Carrusel() {
+const Carrusel = () => {
   const { agregarProductoAlCarrito } = useCarrito();
 
   const productos = [
@@ -30,25 +30,39 @@ function Carrusel() {
   ];
 
   return (
-    <Carousel interval={5000} className="custom-carousel" nextLabel="Siguiente" prevLabel="Anterior">
-      {productos.map((producto) => (
-        <Carousel.Item key={producto.uniqueId}>
-          <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
-          <div className="carousel-caption">
-            <Typography variant="h6">{producto.nombre_producto}</Typography>
-            <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => agregarProductoAlCarrito(producto)}
-              sx={{ marginTop: '10px' }}
-            >
-              Añadir al carrito
-            </Button>
-          </div>
-        </Carousel.Item>
-      ))}
-    </Carousel>
+    <Box className="custom-carousel-container">
+      <Carousel
+        autoPlay={true}
+        interval={5000}
+        indicators={true}
+        animation="slide"
+        navButtonsAlwaysVisible={true}
+        navButtonsProps={{
+          style: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            color: '#ffffff',
+          },
+        }}
+      >
+        {productos.map((producto) => (
+          <Box key={producto.uniqueId} className="custom-carousel-item">
+            <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
+            <Box className="carousel-caption" textAlign="center" mt={2}>
+              <Typography variant="h6">{producto.nombre_producto}</Typography>
+              <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => agregarProductoAlCarrito(producto)}
+                sx={{ marginTop: '10px' }}
+              >
+                Añadir al carrito
+              </Button>
+            </Box>
+          </Box>
+        ))}
+      </Carousel>
+    </Box>
   );
 }
 

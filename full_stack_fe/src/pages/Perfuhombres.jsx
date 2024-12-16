@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { useCarrito } from "../components/Carrito";
+import FormEditar from "../components/FormEditar";
 import '../styles/Paginahombre.css';
 import { useNavigate } from "react-router-dom";
+import { actualizaDatos } from "../services/fetch";
 
 const PerfuHombres = () => {
   const { agregarProductoAlCarrito } = useCarrito();
@@ -10,17 +12,18 @@ const PerfuHombres = () => {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProducto, setSelectedProducto] = useState(null);
-  const navigate = useNavigate(); // Hook para navegar a otras páginas
-  
-  // Cargar productos desde la API
+  const navigate = useNavigate();
+
+  // Simulamos la función isAdmin
+  const isAdmin = true; // Cambia esto según tu lógica de autenticación
+
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         const response = await fetch("http://127.0.0.1:8000/api/crear-producto/");
         if (!response.ok) throw new Error("Error al cargar los productos");
         const data = await response.json();
-        console.log(data)
-        const productosHombre = data.filter((producto)=> producto.genero === "Hombre");
+        const productosHombre = data.filter((producto) => producto.genero === "Hombre");
         setProductos(productosHombre);
         setLoading(false);
       } catch (error) {
@@ -44,6 +47,19 @@ const PerfuHombres = () => {
 
   const manejarAgregarProducto = (producto) => {
     agregarProductoAlCarrito(producto);
+  };
+
+  const manejarActualizarProducto = async (id, datosActualizados) => {
+    try {
+      const datos = await actualizaDatos(id, datosActualizados);
+      setProductos((prevProductos) =>
+        prevProductos.map((producto) =>
+          producto.id === id ? { ...producto, ...datos } : producto
+        )
+      );
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error);
+    }
   };
 
   if (loading) {
@@ -71,6 +87,14 @@ const PerfuHombres = () => {
               >
                 Añadir al carrito
               </button>
+              {isAdmin && (
+                <button
+                  className="edit-button"
+                  onClick={() => openModal(producto)}
+                >
+                  Editar
+                </button>
+              )}
             </div>
           </div>
         ))}
@@ -82,25 +106,11 @@ const PerfuHombres = () => {
             <button className="close-button" onClick={closeModal}>
               &times;
             </button>
-            <img
-              src={selectedProducto.imagen}
-              alt={selectedProducto.nombre_producto}
-              className="modal-image"
+            <FormEditar
+              producto={selectedProducto}
+              onClose={closeModal}
+              onActualizar={manejarActualizarProducto}
             />
-            <h2>{selectedProducto.nombre_producto}</h2>
-            <p>Marca: {selectedProducto.marca}</p>
-            <p>Precio: ${selectedProducto.precio}</p>
-            <p>Cantidad: {selectedProducto.cantidad_ml} ml</p>
-            <p>Descripción: Este perfume tiene una fragancia increíble...</p>
-            <button
-              className="add-to-cart-button"
-              onClick={() => {
-                manejarAgregarProducto(selectedProducto);
-                closeModal();
-              }}
-            >
-              Añadir al carrito
-            </button>
           </div>
         </div>
       )}
