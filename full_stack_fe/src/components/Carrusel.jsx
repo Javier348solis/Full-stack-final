@@ -1,12 +1,13 @@
 import React from 'react';
-import Carousel from 'react-material-ui-carousel';
 import { Button, Typography, Box } from '@mui/material';
 import { useCarrito } from './Carrito';
+import { useAuth } from './Authprovider';
 import Imagen from './Imagen';
 import '../styles/Carrusel.css';
 
 const Carrusel = () => {
   const { agregarProductoAlCarrito } = useCarrito();
+  const { isAuthenticated, login } = useAuth();
 
   const productos = [
     {
@@ -29,41 +30,37 @@ const Carrusel = () => {
     },
   ];
 
+  const handleAddToCart = (producto) => {
+    if (!isAuthenticated) {
+      alert('Debes estar registrado para añadir productos al carrito.');
+      window.location.href = '/registro'; // Redirige al registro
+    } else {
+      agregarProductoAlCarrito(producto);
+      alert('Producto añadido al carrito con éxito.');
+    }
+  };
+
   return (
     <Box className="custom-carousel-container">
-      <Carousel
-        autoPlay={true}
-        interval={5000}
-        indicators={true}
-        animation="slide"
-        navButtonsAlwaysVisible={true}
-        navButtonsProps={{
-          style: {
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            color: '#ffffff',
-          },
-        }}
-      >
-        {productos.map((producto) => (
-          <Box key={producto.uniqueId} className="custom-carousel-item">
-            <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
-            <Box className="carousel-caption" textAlign="center" mt={2}>
-              <Typography variant="h6">{producto.nombre_producto}</Typography>
-              <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => agregarProductoAlCarrito(producto)}
-                sx={{ marginTop: '10px' }}
-              >
-                Añadir al carrito
-              </Button>
-            </Box>
+      {productos.map((producto) => (
+        <Box key={producto.uniqueId} className="custom-carousel-item">
+          <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
+          <Box className="carousel-caption" textAlign="center" mt={2}>
+            <Typography variant="h6">{producto.nombre_producto}</Typography>
+            <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleAddToCart(producto)}
+              sx={{ marginTop: '10px' }}
+            >
+              Añadir al carrito
+            </Button>
           </Box>
-        ))}
-      </Carousel>
+        </Box>
+      ))}
     </Box>
   );
-}
+};
 
 export default Carrusel;

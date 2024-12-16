@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import '../styles/Navbar.css';
 import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, InputBase, IconButton, Menu, MenuItem } from '@mui/material';
-import { ShoppingCart as ShoppingCartIcon, Search as SearchIcon } from '@mui/icons-material';
+import { ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Logout as LogoutIcon } from '@mui/icons-material';
 import { useCarrito } from '../components/Carrito';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const { productos } = useCarrito(); // Usamos el hook 'useCarrito' para acceder al carrito
+    const { productos } = useCarrito();
 
     // Manejo de menú de categorías
     const [anchorEl, setAnchorEl] = useState(null);
@@ -19,7 +18,11 @@ const Navbar = () => {
     };
 
     const handleCarritoClick = () => {
-        navigate('/carrito'); // Redirige a la página del carrito
+        navigate('/carrito');
+    };
+
+    const handleLogout = () => {
+        navigate('/login'); // Redirige al login
     };
 
     return (
@@ -76,6 +79,11 @@ const Navbar = () => {
                             {productos.length}
                         </span>
                     )}
+                </IconButton>
+
+                {/* Botón de Logout */}
+                <IconButton color="inherit" onClick={handleLogout} sx={{ marginLeft: '10px', fontSize: 24, color: 'white' }}>
+                    <LogoutIcon />
                 </IconButton>
             </Toolbar>
         </AppBar>

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography } from '@mui/material';
 import { guardarUsuario } from '../services/fetch';
+import Swal from 'sweetalert2';
 import '../styles/Registro.css';
-import Swal from 'sweetalert2'
+
 function FormRegistro() {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -15,12 +16,12 @@ function FormRegistro() {
   const validarEspacios = () => {
     if (!username || !password || !email || !numero) {
       Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Por favor, llene todos los espacios",
+        position: 'top-end',
+        icon: 'error',
+        title: 'Por favor, llene todos los espacios',
         showConfirmButton: false,
-        timer: 3000
-      }); 
+        timer: 3000,
+      });
       return false;
     }
     return true;
@@ -45,28 +46,32 @@ function FormRegistro() {
     try {
       const data = await guardarUsuario(usuario, 'registro-usuario/');
       Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Usuario registrado satisfactoriamente",
+        position: 'center',
+        icon: 'success',
+        title: 'Usuario registrado satisfactoriamente',
         showConfirmButton: false,
-        timer: 3000
+        timer: 3000,
       });
+
+      // Redirigir al inicio de sesión solo después del registro exitoso
       setTimeout(() => {
-        navegar("/login")
-      }, 5000);
+        navegar('/login');
+      }, 3000);
+
       console.log('Usuario registrado:', data);
+
       // Limpiar los campos del formulario
       setUserName('');
       setPassword('');
       setEmail('');
       setNumero('');
     } catch (error) {
-        Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Error al registrar ",
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Error al registrar ',
         showConfirmButton: false,
-        timer: 3000
+        timer: 3000,
       });
       console.error('Error al guardar el usuario:', error);
     }
@@ -76,7 +81,7 @@ function FormRegistro() {
     <div className="contenedor-registro">
       {/* Formulario */}
       <div className="contenedor-formulario">
-        <Typography variant="h4" color="primary" sx={{paddingBottom: 2}}>
+        <Typography variant="h4" color="primary" sx={{ paddingBottom: 2 }}>
           Registro
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -120,7 +125,6 @@ function FormRegistro() {
             color="primary"
             fullWidth
             sx={{ marginTop: '15px' }}
-            onClick={() => navegar("/login")}
           >
             Registrarse
           </Button>
@@ -136,7 +140,7 @@ function FormRegistro() {
             ¿Ya tienes una cuenta?{' '}
             <Link
               to="/login"
-              sx={{ textDecoration: 'underline', marginLeft: '5px' }}
+              style={{ textDecoration: 'underline', marginLeft: '5px' }}
             >
               Inicia sesión
             </Link>
