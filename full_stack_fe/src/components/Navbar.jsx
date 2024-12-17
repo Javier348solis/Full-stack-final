@@ -7,10 +7,11 @@ import { useAuth } from './Authprovider';
 import { eliminarTodasLasCookies } from '../services/fetch';
 const Navbar = () => {
     const navigate = useNavigate();
-    const { productos } = useCarrito();
+    const { listaProductos,productos } = useCarrito();
     const {logout} = useAuth()
     // Manejo de menú de categorías
     const [anchorEl, setAnchorEl] = useState(null);
+    
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -66,7 +67,7 @@ const Navbar = () => {
                 {/* Carrito de compras */}
                 <IconButton color="inherit" onClick={handleCarritoClick}>
                     <ShoppingCartIcon />
-                    {productos.length > 0 && (
+                    {listaProductos.length > 0 && (
                         <span
                             style={{
                                 position: 'absolute',
@@ -79,7 +80,7 @@ const Navbar = () => {
                                 fontSize: '12px',
                             }}
                         >
-                            {productos.length}
+                            {listaProductos.length}
                         </span>
                     )}
                 </IconButton>

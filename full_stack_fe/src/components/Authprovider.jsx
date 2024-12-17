@@ -8,13 +8,14 @@ export const AuthProvider = ({ children }) => {
 
   // Simula el inicio de sesión
   const login = () => {
-    console.log("dad|dsa")
-    setIsAuthenticated(true);
+    setIsAuthenticated(true)      
+    localStorage.setItem("login",isAuthenticated)
   };
-
   // Simula el cierre de sesión
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem("login")
+    
   };
 
   return (

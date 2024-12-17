@@ -4,21 +4,21 @@ import { Button } from '@mui/material'; // Importar Button de Material UI
 import { useNavigate } from 'react-router-dom'; // Importar hook para redirección
 
 const ProductosCarrito = () => {
-  const { productos, eliminarProducto } = useCarrito();
+  const { productos, eliminarProducto,listaProductos } = useCarrito();
   const navigate = useNavigate();
 
   // Calcular el total del carrito
-  const totalCarrito = productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+  const totalCarrito = listaProductos.reduce((total, producto) => total + parseFloat(producto.precio), 0);
 
   return (
     <div style={{ padding: '20px' }}>
       <h2>Carrito de Compras</h2>
-      {productos.length === 0 ? (
+      {listaProductos.length === 0 ? (
         <p>No hay productos en el carrito.</p>
       ) : (
         <>
           <ul style={{ listStyleType: 'none', padding: 0 }}>
-            {productos.map((producto) => (
+            {listaProductos.map((producto) => (
               <li
                 key={producto.uniqueId}
                 style={{
@@ -31,7 +31,7 @@ const ProductosCarrito = () => {
               >
                 {/* Imagen del producto */}
                 <img
-                  src={producto.imagen || "imagen_url"}
+                  src={producto.imagen || "imagen"}
                   alt={producto.nombre}
                   style={{
                     width: '200px',
@@ -70,7 +70,7 @@ const ProductosCarrito = () => {
           </ul>
 
           {/* Total del carrito */}
-          <h3 style={{ marginTop: '20px' }}>Total: ${totalCarrito.toFixed(2)}</h3>
+          <h3 style={{ marginTop: '20px' }}>Total: ${totalCarrito}</h3>
 
           {/* Botón para proceder al pago */}
           <Button

@@ -1,37 +1,29 @@
-import React from 'react';
 import { Button, Typography, Box } from '@mui/material';
 import { useCarrito } from './Carrito';
 import { useAuth } from './Authprovider';
 import Imagen from './Imagen';
 import '../styles/Carrusel.css';
-
+import { useState,useEffect } from 'react';
+import { obtenerUsuario } from '../services/fetch';
 const Carrusel = () => {
   const { agregarProductoAlCarrito } = useCarrito();
   const { isAuthenticated, login } = useAuth();
+  const [listaProductos, setListaProductos] = useState([]);
+  
+  useEffect(() => {
+    const traerProductos = async () => {
+      const response = await fetch("http://127.0.0.1:8000/api/crear-producto/")
+      const data = await response.json();
+      const oferta = data.filter(producto => producto.oferta === true)
+      setListaProductos(oferta);
+    }
+    traerProductos();
+  }, [isAuthenticated])
 
-  const productos = [
-    {
-      uniqueId: 1,
-      nombre_producto: 'Versace eros Energy (2024)',
-      precio: 50000,
-      imagen_url: 'src/Images/versace-eros.jpg',
-    },
-    {
-      uniqueId: 2,
-      nombre_producto: 'Polo Green',
-      precio: 46000,
-      imagen_url: 'src/Images/POLO PERFUME.JPG',
-    },
-    {
-      uniqueId: 3,
-      nombre_producto: 'Versace eros EDT',
-      precio: 44000,
-      imagen_url: 'src/Images/versace eros.jpg',
-    },
-  ];
+
 
   const handleAddToCart = (producto) => {
-    if (!isAuthenticated) {
+    if (!localStorage.getItem('login')) {
       alert('Debes estar registrado para añadir productos al carrito.');
       window.location.href = '/registro'; // Redirige al registro
     } else {
@@ -42,9 +34,9 @@ const Carrusel = () => {
 
   return (
     <Box className="custom-carousel-container">
-      {productos.map((producto) => (
+      {listaProductos.map((producto) => (
         <Box key={producto.uniqueId} className="custom-carousel-item">
-          <Imagen text={producto.nombre_producto} url={producto.imagen_url} />
+          <Imagen text={producto.nombre_producto} url={producto.imagen} />
           <Box className="carousel-caption" textAlign="center" mt={2}>
             <Typography variant="h6">{producto.nombre_producto}</Typography>
             <Typography variant="body1">Oferta: ₡{producto.precio.toLocaleString()}</Typography>
