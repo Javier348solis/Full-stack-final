@@ -30,7 +30,7 @@ const Routing = () => {
         <Route path='/mujeres' element={<PerfuMujer />} />
         <Route path='/hombres' element={<PerfuHombres />} />
         <Route path='/contacto' element={<Contacto />} />
-        <Route path='/admin' element={<RutasPrivadas isAuthenticated={isAdmin} children={<Administrador />} />} />
+        <Route path='/admin' element={<RutasPrivadas isAuthenticated={localStorage.getItem('admin')} children={<Administrador />} />} />
         <Route path='/carrito' element={<ProductosCarrito/>}/>
         <Route path='/metodopago' element={<Pago/>}/>
       </Routes>

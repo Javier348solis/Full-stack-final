@@ -37,6 +37,13 @@ function FormLogin() {
         console.log('Inicio de sesión exitoso');
         localStorage.setItem('access_token', data.token);
         localStorage.setItem('admin', data.is_admin);
+        console.log(data.is_admin)
+        if(data.is_admin || data.is_admin === 'true'){
+          console.log('entra al if')
+          navegar('/admin')
+          login()
+        }
+        navegar('/')
         login()
       } else if (!data.token) {
         alert('Error de inicio de sesión');
@@ -65,7 +72,7 @@ function FormLogin() {
         <Typography variant="h4" gutterBottom>
           Inicio de Sesión
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form>
           <TextField 
             label="Nombre Completo" 
             variant="outlined" 
@@ -124,7 +131,7 @@ function FormLogin() {
           <Button
             variant="contained"
             color="primary"
-            type="submit"
+            type="button"
             fullWidth
             sx={{
               mt: 2,
@@ -134,19 +141,9 @@ function FormLogin() {
                 backgroundColor: '#f4f2ea',
               }
             }}
-            onClick={() => navegar("/")}
+            onClick={handleSubmit}
           >
             Ingresar
-          </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ marginTop: '15px' }}
-            onClick={() => navegar("/login")}
-          >
-            Registrarse
           </Button>
         </form>
         <Box mt={2}>
