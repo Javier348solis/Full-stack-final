@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import { useCarrito } from "../components/Carrito";
 import '../styles/Paginahombre.css';
 import { useNavigate } from "react-router-dom";
+import FormEditar from "../components/FormEditar";
+import { actualizaDatos } from "../services/fetch";
 
 const Perfumujer = () => {
   const { agregarProductoAlCarrito } = useCarrito();
@@ -31,6 +33,20 @@ const Perfumujer = () => {
 
     fetchProductos();
   }, []);
+
+  const manejarActualizarProducto = async (id, datosActualizados) => {
+    try {
+      const datos = await actualizaDatos(id, datosActualizados);
+      setProductos((prevProductos) =>
+        prevProductos.map((producto) =>
+          producto.id === id ? { ...producto, ...datos } : producto
+        )
+      );
+    } catch (error) {
+      console.error("Error al actualizar el producto:", error);
+    }
+  };
+
 
   const openModal = (producto) => {
     setSelectedProducto(producto);
@@ -63,13 +79,19 @@ const Perfumujer = () => {
               onClick={() => openModal(producto)}
             />
             <div className="product-card-body">
-              <h3>{producto.nombre_producto}</h3>
-              <p>Precio: ${producto.precio}</p>
+              <h3 style={{color:"#000"}}>{producto.nombre_producto}</h3>
+              <p style={{color:"#000"}}>Precio: ${producto.precio}</p>
               <button
                 className="add-to-cart-button"
                 onClick={() => manejarAgregarProducto(producto)}
               >
                 Añadir al carrito
+              </button>
+              <button
+                className="add-to-cart-button"
+                onClick={() => openModal(producto)}
+              >
+                Edite  la picha
               </button>
             </div>
           </div>
@@ -82,25 +104,11 @@ const Perfumujer = () => {
             <button className="close-button" onClick={closeModal}>
               &times;
             </button>
-            <img
-              src={selectedProducto.imagen}
-              alt={selectedProducto.nombre_producto}
-              className="modal-image"
+            <FormEditar
+              producto={selectedProducto}
+              onClose={closeModal}
+              onActualizar={manejarActualizarProducto}
             />
-            <h2>{selectedProducto.nombre_producto}</h2>
-            <p>Marca: {selectedProducto.marca}</p>
-            <p>Precio: ${selectedProducto.precio}</p>
-            <p>Cantidad: {selectedProducto.cantidad_ml} ml</p>
-            <p>Descripción: Este perfume tiene una fragancia increíble...</p>
-            <button
-              className="add-to-cart-button"
-              onClick={() => {
-                manejarAgregarProducto(selectedProducto);
-                closeModal();
-              }}
-            >
-              Añadir al carrito
-            </button>
           </div>
         </div>
       )}

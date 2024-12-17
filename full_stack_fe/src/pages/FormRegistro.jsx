@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography } from '@mui/material';
 import { guardarUsuario } from '../services/fetch';
-import Swal from 'sweetalert2';
+import Toastify from 'toastify-js'
 import '../styles/Registro.css';
 
 function FormRegistro() {
@@ -15,13 +15,20 @@ function FormRegistro() {
   // Función para validar los campos
   const validarEspacios = () => {
     if (!username || !password || !email || !numero) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Por favor, llene todos los espacios',
-        showConfirmButton: false,
-        timer: 3000,
-      });
+      Toastify({
+        text: "Rellene todos los espacios!",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
       return false;
     }
     return true;
@@ -45,13 +52,20 @@ function FormRegistro() {
 
     try {
       const data = await guardarUsuario(usuario, 'registro-usuario/');
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Usuario registrado satisfactoriamente',
-        showConfirmButton: false,
-        timer: 3000,
-      });
+      Toastify({
+        text: "Registro exitoso",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
 
       // Redirigir al inicio de sesión solo después del registro exitoso
       setTimeout(() => {
@@ -66,13 +80,20 @@ function FormRegistro() {
       setEmail('');
       setNumero('');
     } catch (error) {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'error',
-        title: 'Error al registrar ',
-        showConfirmButton: false,
-        timer: 3000,
-      });
+      Toastify({
+        text: "Error al registrar",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
       console.error('Error al guardar el usuario:', error);
     }
   };
@@ -155,3 +176,4 @@ function FormRegistro() {
 }
 
 export default FormRegistro;
+ 
