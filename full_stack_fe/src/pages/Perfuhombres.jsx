@@ -15,8 +15,8 @@ const PerfuHombres = () => {
   const navigate = useNavigate();
 
   // Simulamos la función isAdmin
-  const isAdmin = true; // Cambia esto según tu lógica de autenticación
-
+  const isAdmin = localStorage.getItem('admin'); // Cambia esto según tu lógica de autenticación
+  console.log(isAdmin)
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -87,14 +87,14 @@ const PerfuHombres = () => {
               >
                 Añadir al carrito
               </button>
-              {isAdmin && (
+              {localStorage.getItem('admin') === 'true' ? (
                 <button
                   className="edit-button"
                   onClick={() => openModal(producto)}
                 >
                   Editar
                 </button>
-              )}
+              ):null}
             </div>
           </div>
         ))}
