@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 
   // Simula el inicio de sesión
   const login = () => {
+    console.log("dad|dsa")
     setIsAuthenticated(true);
   };
 

@@ -135,3 +135,20 @@ async function deleteProduct(id) {
   }
   
 export { deleteProduct };
+
+function eliminarTodasLasCookies() {
+  // Obtener todas las cookies como un solo string
+  const cookies = document.cookie.split(";");
+
+  // Iterar sobre todas las cookies y eliminarlas
+  for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const [nombre] = cookie.split("=");
+
+      // Configurar la cookie con una fecha de expiración en el pasado
+      document.cookie = nombre.trim() + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+  }
+  console.log("Todas las cookies han sido eliminadas.");
+}
+
+export { eliminarTodasLasCookies }

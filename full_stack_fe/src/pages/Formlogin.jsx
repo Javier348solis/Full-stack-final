@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import '../styles/Login.css';
 import { obtenerUsuario, guardarUsuario } from '../services/fetch'; 
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../components/Authprovider';
 // Importar componentes de Material UI
 import { Box, TextField, Button, Typography } from '@mui/material';
 
 function FormLogin() {
   const navegar = useNavigate();
-
+  const {login} = useAuth()
+  
   // Definición de estados para los campos de formulario
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,6 +37,7 @@ function FormLogin() {
         console.log('Inicio de sesión exitoso');
         localStorage.setItem('access_token', data.token);
         localStorage.setItem('admin', data.is_admin);
+        login()
       } else if (!data.token) {
         alert('Error de inicio de sesión');
       }

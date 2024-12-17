@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, InputBase, IconButton, Menu, MenuItem } from '@mui/material';
 import { ShoppingCart as ShoppingCartIcon, Search as SearchIcon, Logout as LogoutIcon } from '@mui/icons-material';
 import { useCarrito } from '../components/Carrito';
-
+import { useAuth } from './Authprovider';
+import { eliminarTodasLasCookies } from '../services/fetch';
 const Navbar = () => {
     const navigate = useNavigate();
     const { productos } = useCarrito();
-
+    const {logout} = useAuth()
     // Manejo de menú de categorías
     const [anchorEl, setAnchorEl] = useState(null);
     const handleMenuOpen = (event) => {
@@ -23,6 +24,8 @@ const Navbar = () => {
 
     const handleLogout = () => {
         navigate('/login'); // Redirige al login
+        logout()
+        localStorage.clear()
     };
 
     return (
