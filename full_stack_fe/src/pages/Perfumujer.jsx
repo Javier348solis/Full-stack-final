@@ -91,7 +91,7 @@ const Perfumujer = () => {
                 className="add-to-cart-button"
                 onClick={() => openModal(producto)}
               >
-                Edite  la picha
+                Editar
               </button>
             </div>
           </div>

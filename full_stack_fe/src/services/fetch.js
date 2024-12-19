@@ -87,53 +87,59 @@ const obtenerUsuario = async (endpoint) => {
 
 //Patch
 async function actualizaDatos(id, obj) {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/productos/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-        },
-        body: JSON.stringify(obj),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-  
-      const datos = await response.json();
-      console.log(datos);
-      return datos; // Devuelves los datos actualizados
-    } catch (error) {
-      console.error('Error al actualizar datos:', error);
-      throw error; // Lanzar el error para que el consumidor lo maneje
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/productos/update/${id}/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      },
+      body: JSON.stringify(obj),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} ${response.statusText}`);
     }
+
+    const datos = await response.json();
+    console.log(datos);
+    return datos; // Devuelves los datos actualizados
+  } catch (error) {
+    console.error('Error al actualizar datos:', error);
+    throw error; // Lanzar el error para que el consumidor lo maneje
   }
+}
 export {actualizaDatos }  
       
-//Delete
+/// Función para eliminar un producto
 async function deleteProduct(id) {
-    try {
-      const response = await fetch(`http://127.0.0.1:8000/productos/${id}`, {
-        method: 'DELETE',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-         },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Error al eliminar el producto');
-      }
-  
-      console.log('Producto eliminado correctamente');
-      return true; // Devolver un valor de éxito
-    } catch (error) {
-      console.error('Error al intentar eliminar el producto:', error);
-      throw error; // Lanzar el error para que el consumidor lo maneje
+  if (!id) throw new Error("ID no proporcionado para eliminar el producto");
+
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/productos/delete/${id}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        `Error ${response.status}: ${
+          errorData.detail || "No se pudo eliminar el producto"
+        }`
+      );
     }
+
+    console.log("Producto eliminado correctamente");
+    return true;
+  } catch (error) {
+    console.error("Error al intentar eliminar el producto:", error);
+    throw error;
   }
-  
+}
 export { deleteProduct };
 
 function eliminarTodasLasCookies() {

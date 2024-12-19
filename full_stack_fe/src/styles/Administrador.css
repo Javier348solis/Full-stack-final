@@ -1,3 +1,7 @@
 .letra-color{
     color: black ;
 }
+.titulo-admin{
+    display: flex;
+    justify-content: center;
+}
