@@ -1,171 +1,161 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  AppBar,
-  Toolbar,
-  Button,
-  InputBase,
-  IconButton,
-  Menu,
-  MenuItem,
-  List,
-  ListItem,
-  ListItemText,
-} from '@mui/material';
-import {
-  ShoppingCart as ShoppingCartIcon,
-  Search as SearchIcon,
-  Logout as LogoutIcon,
-} from '@mui/icons-material';
-import { useCarrito } from '../components/Carrito';
-import { useAuth } from './Authprovider';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {AppBar,Toolbar,Typography,Button,InputBase,IconButton,Menu,MenuItem,List,ListItem,ListItemText,Paper,
+} from "@mui/material";
+import {ShoppingCart as ShoppingCartIcon,Search as SearchIcon,Logout as LogoutIcon,} from "@mui/icons-material";
+import { useCarrito } from "./Carrito";
+import { useAuth } from "./Authprovider";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { listaProductos, productos } = useCarrito(); // `productos` es la lista completa
+  const { listaProductos } = useCarrito();
   const { logout } = useAuth();
 
-  // Manejo de menú de categorías
+  const [searchQuery, setSearchQuery] = useState(""); // Término de búsqueda
+  const [searchResults, setSearchResults] = useState([]); // Resultados de búsqueda
+
+  // Manejo del menú de categorías
   const [anchorEl, setAnchorEl] = useState(null);
-  const [searchText, setSearchText] = useState(''); // Estado para el texto de búsqueda
-  const [filteredProducts, setFilteredProducts] = useState([]); // Productos filtrados
+  const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleMenuClose = () => setAnchorEl(null);
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleCarritoClick = () => {
-    navigate('/carrito');
-  };
+  const handleCarritoClick = () => navigate("/carrito");
 
   const handleLogout = () => {
     logout();
     localStorage.clear();
-    navigate('/login'); // Redirige al login
+    navigate("/login");
   };
 
-  const handleSearchChange = (event) => {
-    const query = event.target.value.toLowerCase();
-    setSearchText(query);
+  // Función para manejar la búsqueda
+  const handleSearch = async (query) => {
+    setSearchQuery(query);
+    if (query.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
 
-    if (query.trim() === '') {
-      setFilteredProducts([]); // Si no hay texto, no mostrar resultados
-    } else {
-      // Filtrar productos que coincidan con el texto ingresado
-      const results = productos.filter((product) =>
-        product.nombre.toLowerCase().includes(query)
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/productos/search/?search=${query}`
       );
-      setFilteredProducts(results);
+      if (!response.ok) {
+        throw new Error("Error al buscar productos");
+      }
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.log("Error al buscar productos:", error);
+      setSearchResults([]);
     }
   };
 
   return (
-    <>
-      <AppBar position="sticky">
-        <Toolbar>
-          {/* Logo */}
-          <IconButton edge="start" color="inherit" onClick={() => navigate('/')}>
-            <img src="\src\Images\Logo.gif" alt="Logo" style={{ height: 40 }} />
-          </IconButton>
+    <AppBar position="sticky">
+      <Toolbar>
+        {/* Logo */}
+        <IconButton edge="start" color="inherit" onClick={() => navigate("/")}>
+          <img
+            src="/src/Images/Logo.gif"
+            alt="Logo"
+            style={{ height: 40 }}
+          />
+        </IconButton>
 
-          {/* Enlaces de navegación */}
-          <div style={{ flexGrow: 1 }}>
-            <Button color="inherit" onClick={() => navigate('/ofertas')}>
-              Ofertas
-            </Button>
-            <Button
-              color="inherit"
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleMenuOpen}
-            >
-              Categorías
-            </Button>
-            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-              <MenuItem onClick={() => navigate('/hombres')}>Perfumería Hombre</MenuItem>
-              <MenuItem onClick={() => navigate('/mujeres')}>Perfumería Mujer</MenuItem>
-            </Menu>
-            <Button color="inherit" onClick={() => navigate('/otros')}>
-              Otros
-            </Button>
-          </div>
-
-          {/* Barra de búsqueda */}
-          <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-            <InputBase
-              placeholder="Buscar productos..."
-              value={searchText}
-              onChange={handleSearchChange}
-              style={{
-                color: 'white',
-                backgroundColor: 'rgba(255, 255, 255, 0.15)',
-                borderRadius: '5px',
-                padding: '5px 10px',
-                width: '300px',
-              }}
-            />
-           
-          </div>
-
-          {/* Carrito de compras */}
-          <IconButton color="inherit" onClick={handleCarritoClick}>
-            <ShoppingCartIcon />
-            {listaProductos.length > 0 && (
-              <span
-                style={{
-                
-                  top: '0',
-                 
-                  backgroundColor: 'red',
-                  color: 'white',
-                  borderRadius: '50%',
-                  padding: '4px 8px',
-                  fontSize: '12px',
-                }}
-              >
-                {listaProductos.length}
-              </span>
-            )}
-          </IconButton>
-
-          {/* Botón de Logout */}
-          <IconButton color="inherit" onClick={handleLogout}>
-            <LogoutIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      {/* Resultados de búsqueda */}
-      {filteredProducts.length > 0 && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '70px',
-            left: '20px',
-            backgroundColor: 'white',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            borderRadius: '5px',
-            zIndex: 1000,
-            width: '300px',
-          }}
-        >
-          <List>
-            {filteredProducts.map((product) => (
-              <ListItem
-                key={product.id}
-                button
-                onClick={() => navigate(`/producto/${product.id}`)}
-              >
-                <ListItemText primary={product.nombre} />
-              </ListItem>
-            ))}
-          </List>
+        {/* Enlaces de navegación */}
+        <div style={{ flexGrow: 1 }}>
+          <Button color="inherit" onClick={() => navigate("/ofertas")}>
+            Ofertas
+          </Button>
+          <Button color="inherit" onClick={handleMenuOpen}>
+            Categorías
+          </Button>
+          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+            <MenuItem onClick={() => navigate("/hombres")}>
+              Perfumería Hombre
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/mujeres")}>
+              Perfumería Mujer
+            </MenuItem>
+          </Menu>
+          <Button color="inherit" onClick={() => navigate("/otros")}>
+            Otros
+          </Button>
         </div>
-      )}
-    </>
+
+        {/* Barra de búsqueda */}
+        <div style={{ position: "relative", display: "flex", alignItems: "center" }}>
+          <InputBase
+            placeholder="Buscar productos..."
+            value={searchQuery}
+            onChange={(e) => handleSearch(e.target.value)}
+           
+            style={{
+              color: "white",
+              paddingRight: "10px",
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              borderRadius: "4px",
+              padding: "5px",
+            }}
+          />
+          {/* Mostrar resultados de búsqueda */}
+          {searchResults.length > 0 && (
+            <Paper
+              style={{
+                position: "absolute",
+                top: "40px",
+                left: 0,
+                right: 0,
+                zIndex: 1000,
+                maxHeight: "300px",
+                overflowY: "auto",
+              }}
+            >
+              <List>
+                {searchResults.map((producto) => (
+                  <ListItem
+                    key={producto.uniqueId}
+                    button
+                    onClick={() => navigate(`/producto/${producto.uniqueId}`)}
+                  >
+                    <ListItemText
+                      primary={producto.nombre_producto}
+                      secondary={`$${producto.precio}`}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+          )}
+        </div>
+
+        {/* Carrito de compras */}
+        <IconButton color="inherit" onClick={handleCarritoClick}>
+          <ShoppingCartIcon />
+          {listaProductos.length > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "20",
+                backgroundColor: "red",
+                color: "white",
+                borderRadius: "50%",
+                padding: "2px 6px",
+                fontSize: "12px",
+              }}
+            >
+              {listaProductos.length}
+            </span>
+          )}
+        </IconButton>
+
+        {/* Botón de logout */}
+        <IconButton color="inherit" onClick={handleLogout}>
+          <LogoutIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 

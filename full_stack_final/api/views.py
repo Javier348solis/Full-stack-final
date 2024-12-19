@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from rest_framework.response import Response
+from rest_framework.response import Response # type: ignore
 from rest_framework import status
 from django.contrib.auth import authenticate
 from .serializers import ProductosSerializer, StockProductosSerializer, DatosComprasSerializer
@@ -98,3 +98,26 @@ class ProductoDelete(DestroyAPIView):
     def get_permissions(self):
         if self.request.method == 'DELETE':
             return [IsAdminUser()]  # Si no esta autenticado puede hacer get
+        
+        
+class ProductoSearch(APIView):
+    """
+    Vista para buscar productos únicamente por el nombre.
+    """
+    permission_classes = [AllowAny]  # Permite acceso público para búsqueda
+
+    def get(self, request, *args, **kwargs):
+        # Obtener el parámetro de búsqueda
+        query = request.query_params.get('search', '').strip().lower()
+
+        # Validar que se haya enviado un término de búsqueda
+        if not query:
+            return Response({"error": "Debe proporcionar un término de búsqueda en el parámetro 'search'."}, status=400)
+
+        # Filtrar productos por coincidencia parcial en el nombre
+        productos = Productos.objects.filter(Q(nombre_producto__icontains=query)) # type: ignore
+
+        # Serializar los datos
+        serializer = ProductosSerializer(productos, many=True)
+
+        return Response(serializer.data)
