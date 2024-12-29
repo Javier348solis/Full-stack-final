@@ -1,10 +1,11 @@
 .custom-carousel-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+  gap: 20px; /* Espaciado entre las cards */
   justify-content: center;
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
   background-color: #010123; /* Azul oscuro */
-  padding: 20px; /* Espacio alrededor del carrusel */
-  position: relative;
+  padding: 40px 20px; /* Espacio más amplio para darle aire al diseño */
   margin-top: 120px; /* Espacio entre el carrusel y el navbar */
 }
 
@@ -12,66 +13,37 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
   padding: 20px;
+  margin: 10px;
+  min-height: 100px; /* Define un alto mínimo consistente para las cards */
 }
+
 
 .carousel-item img {
-  width: 350px;
-  height: 500px;
-  object-fit: cover;
-  margin: 0 auto;
+  width: 100%; /* Ocupa el ancho total del contenedor */
+  min-height: 200px; /* Altura mínima para mantener uniformidad */
+  max-height: 200px; /* Limita la altura máxima */
+  object-fit: cover; /* Ajusta la imagen para que cubra el área */
+  border-radius: 10px; /* Bordes redondeados */
 }
 
-.carousel-inner {
-  display: flex;
-  justify-content: center;
-}
 
 .carousel-caption {
-  width: 350px;
+  width: 100%; /* Ocupa el ancho del contenedor */
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
   color: white;
   padding: 10px;
   border-radius: 5px;
-  text-align: center;
 }
-
-/* Botones de navegación */
-.carousel-button {
-  position: absolute;
-  top: 50%; /* Centra los botones verticalmente */
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  color: white;
-  width: 50px; /* Tamaño de los botones */
-  height: 50px;
-  border-radius: 50%; /* Forma circular */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2; /* Asegúrate de que los botones estén por encima del contenido */
-}
-
-.carousel-button:hover {
-  background: #ff8c00; /* Cambia el color del fondo al pasar el mouse */
-}
-
-.carousel-button:first-of-type {
-  left: -200px; /* Ajusta la distancia del botón al lado izquierdo del carrusel */
-}
-
-.carousel-button:last-of-type {
-  right: -200px; /* Ajusta la distancia del botón al lado derecho del carrusel */
-}
-
-/* Espaciado superior del carrusel */
-.carousel {
-  padding-top: 120px;
-}
-
-/* Eliminación de líneas verdes */
-.custom-carousel::before {
-  content: none; /* Elimina el pseudo-elemento responsable de las líneas verdes */
+.custom-carousel-item img {
+  display: block; /* Asegúrate de que la imagen sea un bloque */
+  width: 100%; /* Ajusta la imagen al ancho del contenedor */
+  height: 280px; /* Fija la altura exacta */
+  object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
 }

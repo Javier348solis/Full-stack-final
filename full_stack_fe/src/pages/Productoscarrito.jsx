@@ -48,7 +48,7 @@ const ProductosCarrito = () => {
                     <strong>{producto.nombre}</strong>
                   </p>
                   <p>Cantidad: {producto.cantidad}</p>
-                  <p>Precio: ${producto.precio}</p>
+                  <p>Precio: ₡{producto.precio}</p>
                 </div>
 
                 {/* Botón para eliminar */}
@@ -70,7 +70,7 @@ const ProductosCarrito = () => {
           </ul>
 
           {/* Total del carrito */}
-          <h3 style={{ marginTop: '20px' }}>Total: ${totalCarrito}</h3>
+          <h3 style={{ marginTop: '20px' }}>Total: ₡{totalCarrito}</h3>
 
           {/* Botón para proceder al pago */}
           <Button

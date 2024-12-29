@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {AppBar,Toolbar,Typography,Button,InputBase,IconButton,Menu,MenuItem,List,ListItem,ListItemText,Paper,
-} from "@mui/material";
+import {AppBar,Toolbar,Typography,Button,InputBase,IconButton,Menu,MenuItem,List,ListItem,ListItemText,Paper} from "@mui/material";
 import {ShoppingCart as ShoppingCartIcon,Search as SearchIcon,Logout as LogoutIcon,} from "@mui/icons-material";
 import { useCarrito } from "./Carrito";
 import { useAuth } from "./Authprovider";

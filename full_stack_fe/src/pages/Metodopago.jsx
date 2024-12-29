@@ -81,7 +81,7 @@ const Pago = () => {
                     variant="outlined"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
-                    sx={{ marginBottom: 2 }}
+                    sx={{ marginBottom: 2, background: 'white'}}
                 />
 
                 <TextField
@@ -91,7 +91,7 @@ const Pago = () => {
                     type="tel"
                     value={telefono}
                     onChange={(e) => setTelefono(e.target.value)}
-                    sx={{ marginBottom: 2 }}
+                    sx={{ marginBottom: 2, background: 'white' }}
                 />
 
                 <FormControl fullWidth sx={{ marginBottom: 2 }}>
@@ -100,6 +100,7 @@ const Pago = () => {
                         value={metodoPago}
                         onChange={(e) => setMetodoPago(e.target.value)}
                         label="Método de Pago"
+                        sx={{ marginBottom: 2, background: 'white' }}
                     >
                         <MenuItem value="sinpe">Sinpe Móvil</MenuItem>
                         <MenuItem value="transferencia">Transferencia Bancaria</MenuItem>
@@ -114,7 +115,7 @@ const Pago = () => {
                     rows={3}
                     value={comentarios}
                     onChange={(e) => setComentarios(e.target.value)}
-                    sx={{ marginBottom: 2 }}
+                    sx={{ marginBottom: 2, background: 'white'}}
                 />
 
                 <Button type="submit" variant="contained" color="primary" fullWidth>

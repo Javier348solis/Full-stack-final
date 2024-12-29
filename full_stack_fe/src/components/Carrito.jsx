@@ -1,6 +1,7 @@
 // Archivo: CarritoProvider.js
 
 import React, { createContext, useState, useContext } from 'react';
+import Swal from 'sweetalert2';
 
 // Crear el contexto del carrito
 const CarritoContext = createContext();
@@ -23,7 +24,15 @@ export const CarritoProvider = ({ children }) => {
     );
     setProductos(newProductos);
     localStorage.setItem('productos', JSON.stringify(newProductos));
+    Swal.fire({
+      title: 'Producto eliminado',
+      text: 'El producto se eliminó correctamente del carrito.',
+      icon: 'success',
+      timer: 2000, // Se cierra automáticamente en 2 segundos
+      showConfirmButton: false, // Oculta el botón de confirmación
+    });
   };
+
   return (
     <CarritoContext.Provider
       value={{

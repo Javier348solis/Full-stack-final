@@ -37,27 +37,39 @@ const PaginaAdministrador = () => {
 
   // Función para manejar la eliminación de un producto
   const handleDelete = async (id) => {
-    try {
-      await deleteProduct(id);
-      setProductos((prev) => prev.filter((producto) => producto.uniqueId !== id));
-      console.log("Producto eliminado correctamente");
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Producto eliminado",
-        showConfirmButton: false,
-        timer: 3000
-      });
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "El producto no se pudo",
-        showConfirmButton: false,
-        timer: 3000
-      });
-    }
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteProduct(id);
+          setProductos((prev) => prev.filter((producto) => producto.uniqueId !== id));
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Producto eliminado correctamente",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } catch (error) {
+          console.error("Error al eliminar el producto:", error);
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "No se pudo eliminar el producto",
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
+      }
+    });
   };
 
   // Función para manejar la actualización de un producto
