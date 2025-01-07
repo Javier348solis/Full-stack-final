@@ -28,7 +28,7 @@ export const CarritoProvider = ({ children }) => {
       title: 'Producto eliminado',
       text: 'El producto se eliminó correctamente del carrito.',
       icon: 'success',
-      timer: 2000, // Se cierra automáticamente en 2 segundos
+      timer: 4000, // Se cierra automáticamente en 2 segundos
       showConfirmButton: false, // Oculta el botón de confirmación
     });
   };

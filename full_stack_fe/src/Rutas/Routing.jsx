@@ -11,6 +11,7 @@ import Administrador from '../pages/Administrador';
 import RutasPrivadas from './Rutasprivadas';
 import ProductosCarrito from '../pages/Productoscarrito';
 import Pago from '../pages/Metodopago';
+import AboutUs from '../components/AboutUs';
 
 const Routing = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -33,6 +34,7 @@ const Routing = () => {
         <Route path='/admin' element={<RutasPrivadas isAuthenticated={localStorage.getItem('admin')} children={<Administrador />} />} />
         <Route path='/carrito' element={<ProductosCarrito/>}/>
         <Route path='/metodopago' element={<Pago/>}/>
+        <Route path='/acerca-de-nosotros' element={<AboutUs/>} />
       </Routes>
     </Router>
   );

@@ -19,18 +19,18 @@ const PaginaAdministrador = () => {
   useEffect(() => {
     fetchProductos(genero);
   }, [genero]);
-  
+
   const fetchProductos = async (genero) => {
     try {
       // Determina el endpoint basado en si hay un filtro de genero
       const endpoint = genero
         ? `http://127.0.0.1:8000/api/crear-producto/?genero=${genero}`
         : `http://127.0.0.1:8000/api/crear-producto/`;
-  
+
       const response = await fetch(endpoint);
       if (!response.ok) throw new Error("Error al cargar los productos");
       const data = await response.json();
-  
+
       // Mapea los productos para actualizar el estado
       setProductos(
         data.map((producto) => ({
@@ -48,6 +48,12 @@ const PaginaAdministrador = () => {
       console.error("Error al cargar los productos:", error);
     }
   };
+
+  // Filtrar productos con oferta para el carrusel
+  const productosEnOferta = productos.filter((producto) => producto.oferta);
+
+  // Filtrar productos por genero
+  const productosPorGenero = productos.filter((producto) => producto.genero === genero);
 
   // Manejo de la eliminacion de un producto
   const handleDelete = async (uniqueId) => {
@@ -144,9 +150,21 @@ const PaginaAdministrador = () => {
         </select>
       </div>
 
-      {/* Contenedor de productos */}
+      {/* Carrusel de productos en oferta */}
+      <h2>Productos en Oferta</h2>
+      <div className="carousel">
+        {productosEnOferta.map((producto) => (
+          <div key={producto.uniqueId} className="product-card">
+            <img src={producto.imagen} alt={producto.nombre_producto} />
+            <h3>{producto.nombre_producto}</h3>
+            <p>Precio: ₡{producto.precio}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Contenedor de productos por genero */}
       <div className="product-container">
-        {productos.map((producto) => (
+        {productosPorGenero.map((producto) => (
           <div key={producto.uniqueId} className="product-card">
             <img
               src={producto.imagen}
@@ -156,7 +174,7 @@ const PaginaAdministrador = () => {
             />
             <div className="product-card-body">
               <h3>{producto.nombre_producto}</h3>
-              <p className="letra-color">Precio: ₡{producto.precio}</p>
+              <p>Precio: ₡{producto.precio}</p>
               <button onClick={() => handleDelete(producto.uniqueId)}>Eliminar</button>
               <button onClick={() => handleUpdate(producto)}>Actualizar</button>
             </div>

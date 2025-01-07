@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/FormAdmin.css';
-import { useState } from "react";
-import { guardarImagenes, guardarUsuario,guardarPost } from "../services/fetch";
+import { guardarImagenes, guardarPost } from "../services/fetch";
 
 const FormAdministrador = () => {
     const [file, setFile] = useState(null);
@@ -11,6 +10,7 @@ const FormAdministrador = () => {
     const [marca, setMarca] = useState();
     const [descripcion, setDescripcion] = useState();
     const [genero, setGenero] = useState("Hombre"); // Estado para el género
+    const [oferta, setOferta] = useState(false); // Estado para la oferta
 
     const subirImagen = async () => {
         try {
@@ -32,7 +32,8 @@ const FormAdministrador = () => {
             precio: precio,
             marca: marca,
             imagen: Url,
-            genero: genero, 
+            genero: genero,
+            oferta: oferta, // Incluimos el estado de oferta
         };
         const peticion = await guardarPost(datosProductos, 'crear-producto/');
         console.log(peticion);
@@ -80,9 +81,18 @@ const FormAdministrador = () => {
                         type="text"
                         placeholder="Descripcion"
                     />
+                    
+                    {/* Campo de oferta */}
+                    <div>
+                        <label>Oferta:</label>
+                        <select onChange={(e) => setOferta(e.target.value === 'true')} value={oferta}>
+                            <option value="false">No</option>
+                            <option value="true">Sí</option>
+                        </select>
+                    </div>
+
                     <button onClick={subirProducto}>Agregar Producto</button>
                 </div>
-               
             </div>
         </>
     );

@@ -1,14 +1,18 @@
+/* Contenedor principal del carrusel */
 .custom-carousel-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+  justify-content: center; /* Centra el contenedor horizontalmente */
+  align-items: center; /* Centra los productos verticalmente */
   gap: 20px; /* Espaciado entre las cards */
-  justify-content: center;
-  align-items: flex-start; /* Alinea los elementos en la parte superior */
   background-color: #010123; /* Azul oscuro */
   padding: 40px 20px; /* Espacio más amplio para darle aire al diseño */
-  margin-top: 120px; /* Espacio entre el carrusel y el navbar */
+  margin-top: 0px; /* Espacio entre el carrusel y el navbar */
+  position: relative; /* Asegura que los botones de flecha se ubiquen sobre el carrusel */
+  overflow: hidden; /* Oculta los productos fuera de la vista */
+  flex-wrap: nowrap; /* Evita que los productos se ajusten a nuevas filas */
 }
 
+/* Contenedor de cada producto */
 .custom-carousel-item {
   display: flex;
   flex-direction: column;
@@ -21,9 +25,10 @@
   padding: 20px;
   margin: 10px;
   min-height: 100px; /* Define un alto mínimo consistente para las cards */
+  flex: 0 0 auto; /* Evita que los productos se redimensionen */
 }
 
-
+/* Imagen de cada producto */
 .carousel-item img {
   width: 100%; /* Ocupa el ancho total del contenedor */
   min-height: 200px; /* Altura mínima para mantener uniformidad */
@@ -32,7 +37,7 @@
   border-radius: 10px; /* Bordes redondeados */
 }
 
-
+/* Descripción y botones de cada producto */
 .carousel-caption {
   width: 100%; /* Ocupa el ancho del contenedor */
   text-align: center;
@@ -41,9 +46,81 @@
   padding: 10px;
   border-radius: 5px;
 }
+
 .custom-carousel-item img {
   display: block; /* Asegúrate de que la imagen sea un bloque */
   width: 100%; /* Ajusta la imagen al ancho del contenedor */
   height: 280px; /* Fija la altura exacta */
   object-fit: cover; /* Asegura que la imagen se ajuste sin distorsionarse */
+}
+
+/* Botones de flecha para navegar */
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+/* Responsividad para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  .custom-carousel-container {
+    flex-wrap: wrap; /* Permite que los productos se ajusten en varias filas */
+    gap: 10px; /* Menor espacio entre los productos */
+  }
+
+  .custom-carousel-item {
+    width: 100%; /* Cada producto ocupa todo el ancho */
+    margin: 5px; /* Menor margen entre los productos */
+  }
+
+  .arrow-button {
+    font-size: 18px; /* Botones de flecha más pequeños */
+    padding: 8px; /* Botones más pequeños */
+  }
+}
+
+/* Responsividad para pantallas medianas (tabletas) */
+@media (max-width: 1024px) {
+  .custom-carousel-container {
+    flex-wrap: wrap;
+    gap: 15px; /* Espaciado reducido */
+  }
+
+  .custom-carousel-item {
+    width: 48%; /* Mostrar dos productos por fila */
+  }
+
+  .arrow-button {
+    font-size: 20px; /* Botones de flecha medianos */
+  }
+}
+
+/* Para pantallas grandes (escritorios) */
+@media (min-width: 1025px) {
+  .custom-carousel-container {
+    flex-wrap: nowrap; /* Mantiene los productos en una sola fila */
+  }
+
+  .custom-carousel-item {
+    width: 30%; /* Mostrar tres productos por fila */
+  }
+
+  .arrow-button {
+    font-size: 24px; /* Tamaño de flechas estándar */
+  }
 }

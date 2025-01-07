@@ -1,54 +1,92 @@
 /* Asegura que el footer ocupe todo el ancho de la página */
 .footer {
-    width: 100vw; /* Aseguramos que el footer ocupe todo el ancho */
-    background: linear-gradient(to top, #000000, #ffd700); /* Gradiente de negro a dorado */
-    color: white;
-    padding: 30px 0;
-    display: flex;
-    flex-direction: column; /* Establecemos que el contenido del footer se apile en una columna */
-    justify-content: flex-start; /* Para que el contenido se alinee al inicio del footer */
-    align-items: center; /* Centramos el contenido horizontalmente */
-  }
-  
+  width: 100vw; /* Aseguramos que el footer ocupe todo el ancho */
+  background: linear-gradient(to top, #000000, #ffd700); /* Gradiente de negro a dorado */
+  color: white;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column; /* Establecemos que el contenido del footer se apile en una columna */
+  justify-content: flex-start; /* Para que el contenido se alinee al inicio del footer */
+  align-items: center; /* Centramos el contenido horizontalmente */
+}
+
+.footer-content {
+  width: 100%; /* Aseguramos que este contenedor ocupe todo el ancho */
+  display: flex; /* Usamos flexbox para distribuir las columnas */
+  justify-content: space-evenly; /* Distribuimos las columnas uniformemente */
+  padding: 0 20px; /* Espaciado para que no se peguen a los bordes */
+  flex-wrap: wrap; /* Permite que las columnas se ajusten cuando el espacio es pequeño */
+}
+
+.footer-column {
+  text-align: center;
+  flex: 1; /* Las columnas se distribuyen de manera igualitaria */
+  padding: 10px;
+  min-width: 150px; /* Establecemos un ancho mínimo para las columnas */
+}
+
+.footer-column h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  font-size: 14px;
+  margin: 5px 0;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #ffd700; /* Color dorado al pasar el ratón */
+}
+
+/* Alineación de los derechos reservados a la derecha */
+.footer-rights {
+  width: 100%; /* Aseguramos que el contenedor ocupe todo el ancho */
+  text-align: right; /* Alineamos el texto de los derechos reservados a la derecha */
+  padding-right: 20px; /* Padding para no pegar el texto al borde */
+  margin-top: 20px; /* Espaciado para separar de las columnas */
+}
+
+.footer-rights p {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsividad para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
   .footer-content {
-    width: 100%; /* Aseguramos que este contenedor ocupe todo el ancho */
-    display: flex; /* Usamos flexbox para distribuir las columnas */
-    justify-content: space-evenly; /* Distribuimos las columnas uniformemente */
-    padding: 0 20px; /* Espaciado para que no se peguen a los bordes */
+      flex-direction: column; /* Apila las columnas en una sola columna en pantallas pequeñas */
+      align-items: center;
   }
-  
+
   .footer-column {
-    text-align: center;
-    flex: 1; /* Las columnas se distribuyen de manera igualitaria */
+      min-width: 100%; /* Las columnas ocuparán todo el ancho disponible */
+      margin-bottom: 20px; /* Espaciado entre las columnas */
   }
-  
-  .footer-column h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .footer-column a {
-    font-size: 14px;
-    margin: 5px 0;
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-column a:hover {
-    color: #ffd700; /* Color dorado al pasar el ratón */
-  }
-  
-  /* Alineación de los derechos reservados a la derecha */
+
   .footer-rights {
-    width: 100%; /* Aseguramos que el contenedor ocupe todo el ancho */
-    text-align: right; /* Alineamos el texto de los derechos reservados a la derecha */
-    padding-right: 20px; /* Padding para no pegar el texto al borde */
-    margin-top: 20px; /* Espaciado para separar de las columnas */
+      text-align: center; /* Alineamos los derechos reservados al centro en pantallas pequeñas */
+      padding-right: 0;
   }
-  
-  .footer-rights p {
-    font-size: 14px;
-    margin: 0;
+}
+
+/* Responsividad para pantallas de tabletas y pantallas medianas */
+@media (max-width: 1024px) {
+  .footer-content {
+      flex-direction: column; /* En pantallas medianas las columnas se apilan en una sola columna */
+      align-items: center;
   }
-  
+
+  .footer-column {
+      min-width: 200px; /* Asegura que las columnas no se vean demasiado pequeñas */
+      margin-bottom: 20px;
+  }
+
+  .footer-rights {
+      text-align: center;
+      padding-right: 0;
+  }
+}

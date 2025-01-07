@@ -35,7 +35,7 @@ function Footer() {
 
           <Grid item xs={12} sm={3}>
             <Typography variant="h6">Acerca de Nosotros</Typography>
-            <Link href="/acerca-de-nosotros" color="inherit" sx={{ display: 'block', marginBottom: '0.5rem' }}>
+            <Link  onClick={() => navigate("/acerca-de-nosotros")} href="/acerca-de-nosotros" color="inherit" sx={{ display: 'block', marginBottom: '0.5rem' }}>
               Más información sobre la empresa
             </Link>
           </Grid>

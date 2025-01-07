@@ -80,7 +80,7 @@ const Perfumujer = () => {
             />
             <div className="product-card-body">
               <h3 style={{color:"#000"}}>{producto.nombre_producto}</h3>
-              <p style={{color:"#000"}}>Precio: ${producto.precio}</p>
+              <p style={{color:"#000"}}>Precio: ₡{producto.precio}</p>
               <button
                 className="add-to-cart-button"
                 onClick={() => manejarAgregarProducto(producto)}

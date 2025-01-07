@@ -3,13 +3,15 @@ import { useCarrito } from './Carrito';
 import { useAuth } from './Authprovider';
 import Imagen from './Imagen';
 import '../styles/Carrusel.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Swal from 'sweetalert2';
 
 const Carrusel = () => {
   const { agregarProductoAlCarrito } = useCarrito();
   const { isAuthenticated, login } = useAuth();
   const [listaProductos, setListaProductos] = useState([]);
+  const [startIndex, setStartIndex] = useState(0); // Controlar el índice de los productos visibles
+  const carouselRef = useRef(null); // Referencia para el carrusel
 
   useEffect(() => {
     const traerProductos = async () => {
@@ -20,6 +22,16 @@ const Carrusel = () => {
     };
     traerProductos();
   }, [isAuthenticated]);
+
+  // Desplazamiento automático cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStartIndex((prevIndex) => (prevIndex + 1) % listaProductos.length);
+    }, 5000); // 5000ms = 5 segundos
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    return () => clearInterval(interval);
+  }, [listaProductos.length]);
 
   const handleAddToCart = (producto) => {
     if (!localStorage.getItem('login')) {
@@ -43,10 +55,22 @@ const Carrusel = () => {
     }
   };
 
+  const handleArrowClick = (direction) => {
+    if (direction === 'left') {
+      setStartIndex((prevIndex) => (prevIndex - 1 + listaProductos.length) % listaProductos.length);
+    } else if (direction === 'right') {
+      setStartIndex((prevIndex) => (prevIndex + 1) % listaProductos.length);
+    }
+  };
+
   return (
-    <Box className="custom-carousel-container">
+    <Box className="custom-carousel-container" ref={carouselRef}>
+      <button className="arrow-button arrow-left" onClick={() => handleArrowClick('left')}>
+        &lt;
+      </button>
       {listaProductos.length > 0 ? (
-        listaProductos.map((producto) => (
+        // Solo mostramos tres productos a la vez, ciclando
+        listaProductos.slice(startIndex, startIndex + 3).map((producto) => (
           <Box key={producto.uniqueId} className="custom-carousel-item">
             <Imagen text={producto.nombre_producto} url={producto.imagen} />
             <Box className="carousel-caption" textAlign="center" mt={2}>
@@ -68,6 +92,9 @@ const Carrusel = () => {
           No hay productos en oferta en este momento.
         </Typography>
       )}
+      <button className="arrow-button arrow-right" onClick={() => handleArrowClick('right')}>
+        &gt;
+      </button>
     </Box>
   );
 };

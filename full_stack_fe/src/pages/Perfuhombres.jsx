@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useCarrito } from "../components/Carrito";
 import FormEditar from "../components/FormEditar";
 import '../styles/Paginahombre.css';
 import { useNavigate } from "react-router-dom";
 import { actualizaDatos } from "../services/fetch";
+
+
 
 const PerfuHombres = () => {
   const { agregarProductoAlCarrito } = useCarrito(); // Hook para agregar productos al carrito
@@ -130,6 +133,7 @@ const PerfuHombres = () => {
           </div>
         </div>
       )}
+     <Footer/>
     </>
   );
 };
