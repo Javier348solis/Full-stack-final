@@ -86,9 +86,9 @@ const obtenerUsuario = async (endpoint) => {
   
 
 //Patch
-async function actualizaDatos(id, obj) {
+async function actualizaDatos(uniqueId, obj) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/productos/update/${id}/`, {
+    const response = await fetch(`http://127.0.0.1:8000/productos/update/${uniqueId}/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -112,29 +112,35 @@ async function actualizaDatos(id, obj) {
 export {actualizaDatos }  
       
 /// Función para eliminar un producto
-async function deleteProduct(id) {
-  if (!id) throw new Error("ID no proporcionado para eliminar el producto");
+async function deleteProduct(uniqueId) {
+  if (!uniqueId) throw new Error("ID no proporcionado para eliminar el producto");
+
+  const url = `http://127.0.0.1:8000/productos/delete/${uniqueId}/`;
 
   try {
-    const response = await fetch(`http://127.0.0.1:8000/productos/delete/${id}/`, {
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) throw new Error("Token de acceso no encontrado");
+
+    const response = await fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    if (!response.ok) {
+    // Verificar si la respuesta es válida
+    if (response.status === 204) {
+      console.log("Producto eliminado correctamente");
+      return true;
+    } else if (response.status === 401 || response.status === 403) {
+      throw new Error("No autorizado. Verifique su autenticación.");
+    } else {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
-        `Error ${response.status}: ${
-          errorData.detail || "No se pudo eliminar el producto"
-        }`
+        `Error ${response.status}: ${errorData.detail || "Error desconocido"}`
       );
     }
-
-    console.log("Producto eliminado correctamente");
-    return true;
   } catch (error) {
     console.error("Error al intentar eliminar el producto:", error);
     throw error;

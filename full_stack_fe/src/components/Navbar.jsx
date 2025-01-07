@@ -63,9 +63,7 @@ const Navbar = () => {
 
         {/* Enlaces de navegación */}
         <div style={{ flexGrow: 1 }}>
-          <Button color="inherit" onClick={() => navigate("/ofertas")}>
-            Ofertas
-          </Button>
+      
           <Button color="inherit" onClick={handleMenuOpen}>
             Categorías
           </Button>

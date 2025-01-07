@@ -22,4 +22,4 @@ class DatosComprasSerializer(ModelSerializer):
 class ModiProductosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Productos
-        fields = ['id', 'nombre', 'descripcion', 'precio', 'stock']
+        fields = ['id', 'nombre_producto', 'descripcion', 'precio', 'cantidad_ml']

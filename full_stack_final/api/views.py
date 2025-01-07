@@ -86,7 +86,7 @@ class ProductoUpdate(UpdateAPIView):
     lookup_field = 'uniqueId'
 
     def get_permissions(self):
-        if self.request.method == 'GET' or self.request.method == 'PUT' or self.request.method == 'PATCH': 
+        if self.request.method in ['GET', 'PUT', 'PATCH']: 
             return [IsAdminUser()]  
     
     
@@ -94,6 +94,7 @@ class ProductoDelete(DestroyAPIView):
     queryset = Productos.objects.all()
     serializer_class = ProductosSerializer
     lookup_field = 'uniqueId'
+    permission_classes = [AllowAny] 
 
     def get_permissions(self):
         if self.request.method == 'DELETE':

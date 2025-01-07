@@ -93,4 +93,13 @@
     cursor: pointer;
     color: #333;
   }
+  .product-card-body h3 {
+    color: black; /* Cambia el color del nombre del producto */
+    font-weight: bold; /* Opcional: Para hacerlo más legible */
+  }
+  
+  .product-card-body p {
+    color: black; /* Cambia el color del precio */
+    font-size: 14px; /* Opcional: Cambia el tamaño del texto */
+  }
   

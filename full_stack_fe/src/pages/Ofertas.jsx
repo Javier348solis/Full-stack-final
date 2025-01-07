@@ -7,10 +7,10 @@ const Ofertas = () => {
     <>
     <Navbar/>
 
-    
+    <Footer/>
     </>
 
     );
 }
 
-export default Ofertas
+export default Ofertas;

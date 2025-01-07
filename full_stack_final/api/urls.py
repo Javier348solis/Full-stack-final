@@ -12,7 +12,7 @@ urlpatterns = [
     path("stock-productos", StockView.as_view()),
     path("datos-compras", DatosComprasView.as_view()),
     path('productos/update/<int:uniqueId>/', ProductoUpdate.as_view(), name='update_producto'),
-   path('productos/delete/<int:uniqueId>/', ProductoDelete.as_view(), name='delete_producto'),
-   path('productos/search/', ProductoSearch.as_view(), name='producto-search'),
+    path('productos/delete/<int:uniqueId>/', ProductoDelete.as_view(), name='delete_producto'),
+    path('productos/search/', ProductoSearch.as_view(), name='producto-search'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+ 
